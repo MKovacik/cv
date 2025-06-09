@@ -59,20 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollIndicator.style.background = `var(--primary-color)`;
     });
     
-    // Add style for scroll indicator
-    const scrollStyle = document.createElement('style');
-    scrollStyle.textContent = `
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0;
-            z-index: 9999;
-        }
-    `;
-    document.head.appendChild(scrollStyle);
-    
     // Add download CV as PDF button
     const downloadButton = document.createElement('button');
     downloadButton.textContent = 'Download CV';
@@ -86,9 +72,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.body.appendChild(downloadButton);
     
-    // Add button styles
-    const buttonStyle = document.createElement('style');
-    buttonStyle.textContent = `
+    // Add all styles in one style element
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            z-index: 9999;
+        }
+        
         .print-button, .download-button {
             position: fixed;
             z-index: 1000;
@@ -126,20 +121,34 @@ document.addEventListener('DOMContentLoaded', function() {
             box-shadow: 0 4px 12px rgba(226, 0, 116, 0.2);
         }
         
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0;
-            z-index: 9999;
-        }
-        
         @media print {
             .print-button, .download-button, .scroll-indicator {
                 display: none !important;
             }
         }
     `;
-    document.head.appendChild(buttonStyle);
+    document.head.appendChild(styleElement);
+    
+    // Achievements toggle functionality
+    const achievementToggles = document.querySelectorAll('.achievements-toggle');
+    
+    achievementToggles.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+            // Toggle active class on button
+            this.classList.toggle('active');
+            
+            // Find the achievements section that follows this button
+            const achievementsSection = this.nextElementSibling;
+            
+            // Toggle the active class on the achievements section
+            achievementsSection.classList.toggle('active');
+            
+            // Update button text
+            if (this.classList.contains('active')) {
+                this.innerHTML = 'Hide Achievements <i class="fas fa-chevron-up"></i>';
+            } else {
+                this.innerHTML = 'View Achievements <i class="fas fa-chevron-down"></i>';
+            }
+        });
+    });
 });
