@@ -65,10 +65,44 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadButton.id = 'download-button';
     downloadButton.classList.add('download-button');
     downloadButton.addEventListener('click', () => {
-        // This would typically use a library like html2pdf.js
-        // For now, we'll just use print as a fallback
-        alert('For now, please use Print (Ctrl+P/Cmd+P) and save as PDF');
+        // Temporarily show all achievements sections for printing
+        const achievementsSections = document.querySelectorAll('.achievements-section');
+        const achievementToggles = document.querySelectorAll('.achievements-toggle');
+        
+        // Store original states to restore after printing
+        const originalStates = [];
+        achievementsSections.forEach((section, index) => {
+            originalStates.push({
+                sectionHasActiveClass: section.classList.contains('active'),
+                toggleHasActiveClass: achievementToggles[index] ? achievementToggles[index].classList.contains('active') : false,
+                toggleHTML: achievementToggles[index] ? achievementToggles[index].innerHTML : ''
+            });
+            
+            // Make all achievements visible for printing
+            section.classList.add('print-visible');
+        });
+        
+        // Print the document
         window.print();
+        
+        // Restore original states after printing
+        setTimeout(() => {
+            achievementsSections.forEach((section, index) => {
+                section.classList.remove('print-visible');
+                
+                // Restore original state
+                if (!originalStates[index].sectionHasActiveClass) {
+                    section.classList.remove('active');
+                }
+                
+                if (achievementToggles[index]) {
+                    if (!originalStates[index].toggleHasActiveClass) {
+                        achievementToggles[index].classList.remove('active');
+                    }
+                    achievementToggles[index].innerHTML = originalStates[index].toggleHTML;
+                }
+            });
+        }, 1000); // Small delay to ensure print dialog has opened
     });
     document.body.appendChild(downloadButton);
     
