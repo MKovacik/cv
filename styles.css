@@ -33,12 +33,25 @@ body {
 
 /* Header Styles */
 header {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: var(--white);
     padding: 60px 0;
     margin-bottom: 40px;
     position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+    opacity: 0.6;
+    z-index: 0;
 }
 
 .header-content {
@@ -52,6 +65,62 @@ header {
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;
+}
+
+.profile-photo {
+    position: relative;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.profile-photo::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(226, 0, 116, 0.2) 0%, rgba(226, 0, 116, 0.1) 100%);
+    z-index: -1;
+    animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: profileFadeIn 1s ease-out forwards;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes profileFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .profile-info h1 {
@@ -303,7 +372,12 @@ footer {
     color: var(--secondary-color);
 }
 
+.achievements-toggle.active {
+    color: var(--secondary-color);
+}
+
 .achievements-toggle i {
+    margin-left: 5px;
     transition: transform 0.3s ease;
 }
 
@@ -313,16 +387,25 @@ footer {
 
 .achievements-section {
     display: none;
-    background-color: var(--accent-color);
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 4px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    transition: opacity 0.3s ease, margin-top 0.3s ease;
+    background-color: rgba(226, 0, 116, 0.05);
     border-left: 3px solid var(--primary-color);
+    padding: 0 15px;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.achievements-section.active {
+.achievements-section.active,
+.achievements-section.print-visible {
     display: block;
-    animation: fadeIn 0.5s ease;
+    opacity: 1;
+    height: auto;
+    margin-top: 15px;
+    padding: 15px;
 }
 
 @keyframes fadeIn {
@@ -353,8 +436,26 @@ footer {
 /* Responsive Design */
 @media (max-width: 768px) {
     .header-content {
+        padding: 0 15px;
         flex-direction: column;
-        text-align: center;
+    }
+    
+    .profile-photo {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-info h1 {
+        font-size: 2.2rem;
+    }
+    
+    .profile-info h2 {
+        font-size: 1.2rem;
     }
     
     .contact-info {
@@ -382,8 +483,70 @@ footer {
 
 /* Print Styles */
 @media print {
+    .achievements-toggle,
+    .print-button,
+    .download-button,
+    .scroll-progress {
+        display: none !important;
+    }
+    
+    /* Make all achievements sections visible in print */
+    .achievements-section {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .achievements-section h6 {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        font-weight: bold !important;
+    }
+    
+    .achievements-list li {
+        margin-bottom: 3px !important;
+    }
+    
     body {
+        font-size: 12px;
         background-color: #fff;
+    }
+    
+    h1 {
+        font-size: 20px;
+    }
+    
+    h2 {
+        font-size: 16px;
+    }
+    
+    h3 {
+        font-size: 14px;
+    }
+    
+    h4, h5, h6 {
+        font-size: 13px;
+    }
+    
+    header {
+        padding: 20px 0;
+        margin-bottom: 20px;
+        background: none !important;
+        color: #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .section {
+        margin-bottom: 15px;
+        page-break-inside: avoid;
     }
     
     .container {
@@ -391,8 +554,14 @@ footer {
         padding: 0;
     }
     
-    header {
-        padding: 20px 0;
+    /* Ensure profile photo prints well */
+    .profile-image {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+    }
+    
+    .profile-photo::before {
+        display: none !important;
     }
     
     #navbar {
