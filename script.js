@@ -163,25 +163,18 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(styleElement);
     
-    // Enhanced Achievements toggle functionality
+    // Enhanced Achievements toggle functionality with hover and click behavior
     const achievementToggles = document.querySelectorAll('.achievements-toggle');
     
     achievementToggles.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Toggle the active class on this button
-            this.classList.toggle('active');
-            
-            // Find the achievements section that follows this button
-            const achievementsSection = this.nextElementSibling;
-            
-            // Toggle the active class on the achievements section
-            achievementsSection.classList.toggle('active');
-            
-            // Update the button text based on its state with a more engaging label
-            if (this.classList.contains('active')) {
-                this.innerHTML = '<i class="fas fa-trophy"></i> Hide Key Achievements';
+        const achievementsSection = toggle.nextElementSibling;
+        let isPinned = false;
+        
+        // Show on hover
+        toggle.addEventListener('mouseenter', function() {
+            if (!isPinned) {
+                achievementsSection.classList.add('active');
+                this.innerHTML = '<i class="fas fa-trophy"></i> Click to Pin';
                 
                 // Add animation to each achievement item
                 const achievementItems = achievementsSection.querySelectorAll('.achievements-list li');
@@ -193,9 +186,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         item.style.opacity = '1';
                         item.style.transform = 'translateX(0)';
-                    }, 100 + (index * 120));
+                    }, 50 + (index * 80));
                 });
+            }
+        });
+        
+        // Hide on mouse leave if not pinned
+        toggle.addEventListener('mouseleave', function() {
+            if (!isPinned) {
+                achievementsSection.classList.remove('active');
+                this.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
+            }
+        });
+        
+        // Pin/unpin on click
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            isPinned = !isPinned;
+            
+            if (isPinned) {
+                // Pin it open
+                this.classList.add('active');
+                achievementsSection.classList.add('active');
+                this.innerHTML = '<i class="fas fa-thumbtack"></i> Unpin Achievements';
             } else {
+                // Unpin it
+                this.classList.remove('active');
+                achievementsSection.classList.remove('active');
                 this.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
             }
         });

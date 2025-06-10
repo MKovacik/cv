@@ -452,6 +452,7 @@ footer {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    box-shadow: 0 2px 5px rgba(226, 0, 116, 0.1);
 }
 
 .achievements-toggle:before {
@@ -468,6 +469,8 @@ footer {
 
 .achievements-toggle:hover {
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(226, 0, 116, 0.2);
 }
 
 .achievements-toggle:hover:before {
@@ -477,14 +480,20 @@ footer {
 .achievements-toggle.active {
     color: white;
     background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(226, 0, 116, 0.3);
 }
 
 .achievements-toggle i {
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.achievements-toggle:hover i {
+    transform: scale(1.2);
 }
 
 .achievements-toggle.active i {
-    transform: rotate(180deg);
+    transform: rotate(0deg) scale(1.2);
 }
 
 .achievements-section {
