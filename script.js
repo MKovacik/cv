@@ -2,15 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
-    // Add print functionality
-    const printButton = document.createElement('button');
-    printButton.textContent = 'Print CV';
-    printButton.id = 'print-button';
-    printButton.classList.add('print-button');
-    printButton.addEventListener('click', () => {
-        window.print();
-    });
-    document.body.appendChild(printButton);
+    // Print functionality removed as it's redundant with Download CV
     
     // Add animation to skill tags
     const skillTags = document.querySelectorAll('.skill-tag');

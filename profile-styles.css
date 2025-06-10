@@ -844,27 +844,64 @@ footer {
 
 @media (max-width: 576px) {
     .profile-card {
-        padding: 30px 20px;
+        padding: 30px 15px;
+        text-align: center;
     }
     
     .profile-image-container {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 15px;
     }
     
     .name {
-        font-size: 2.2rem;
+        font-size: 2rem;
+        margin-bottom: 5px;
     }
     
     .title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        padding: 0 10px;
     }
     
     .section-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     blockquote {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        padding: 0 15px;
+    }
+    
+    .hero-section {
+        padding: 20px 0;
+    }
+    
+    .social-links {
+        justify-content: center;
+        margin-top: 15px;
+    }
+    
+    .social-link {
+        margin: 0 10px;
+    }
+    
+    .back-button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        margin: 10px 0;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .fact-card {
+        padding: 15px;
+    }
+    
+    .fact-card h3 {
+        font-size: 1.1rem;
     }
 }
