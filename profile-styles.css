@@ -275,13 +275,16 @@ main {
     margin-top: 30px;
     background-color: white;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
     position: relative;
+    width: 180px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .dt-logo-container::before {
@@ -303,7 +306,7 @@ main {
 }
 
 .dt-logo {
-    height: 40px;
+    height: 50px;
     width: auto;
     object-fit: contain;
 }
@@ -903,5 +906,15 @@ footer {
     
     .fact-card h3 {
         font-size: 1.1rem;
+    }
+    
+    .dt-logo-container {
+        width: 220px;
+        padding: 18px;
+        margin-top: 25px;
+    }
+    
+    .dt-logo {
+        height: 60px;
     }
 }
