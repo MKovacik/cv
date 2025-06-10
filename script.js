@@ -163,43 +163,57 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(styleElement);
     
-    // Enhanced Achievements toggle functionality with hover and click behavior
+    // Enhanced Achievements toggle functionality with hover and click behavior, optimized for both desktop and mobile
     const achievementToggles = document.querySelectorAll('.achievements-toggle');
+    
+    // Detect if device is mobile/touch
+    const isTouchDevice = () => {
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+    };
+    
+    const isTouch = isTouchDevice();
     
     achievementToggles.forEach(toggle => {
         const achievementsSection = toggle.nextElementSibling;
         let isPinned = false;
         
-        // Show on hover
-        toggle.addEventListener('mouseenter', function() {
-            if (!isPinned) {
-                achievementsSection.classList.add('active');
-                this.innerHTML = '<i class="fas fa-trophy"></i> Click to Pin';
+        // Animation function for achievement items
+        const animateAchievements = () => {
+            const achievementItems = achievementsSection.querySelectorAll('.achievements-list li');
+            achievementItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-10px)';
+                item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                 
-                // Add animation to each achievement item
-                const achievementItems = achievementsSection.querySelectorAll('.achievements-list li');
-                achievementItems.forEach((item, index) => {
-                    item.style.opacity = '0';
-                    item.style.transform = 'translateX(-10px)';
-                    item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                    
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'translateX(0)';
-                    }, 50 + (index * 80));
-                });
-            }
-        });
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 50 + (index * 80));
+            });
+        };
         
-        // Hide on mouse leave if not pinned
-        toggle.addEventListener('mouseleave', function() {
-            if (!isPinned) {
-                achievementsSection.classList.remove('active');
-                this.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
-            }
-        });
+        if (!isTouch) {
+            // Desktop behavior - hover and click
+            
+            // Show on hover
+            toggle.addEventListener('mouseenter', function() {
+                if (!isPinned) {
+                    achievementsSection.classList.add('active');
+                    this.innerHTML = '<i class="fas fa-thumbtack"></i> Pin View';
+                    animateAchievements();
+                }
+            });
+            
+            // Hide on mouse leave if not pinned
+            toggle.addEventListener('mouseleave', function() {
+                if (!isPinned) {
+                    achievementsSection.classList.remove('active');
+                    this.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
+                }
+            });
+        }
         
-        // Pin/unpin on click
+        // Pin/unpin on click (works for both desktop and mobile)
         toggle.addEventListener('click', function(e) {
             e.preventDefault();
             isPinned = !isPinned;
@@ -208,18 +222,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Pin it open
                 this.classList.add('active');
                 achievementsSection.classList.add('active');
-                this.innerHTML = '<i class="fas fa-thumbtack"></i> Unpin Achievements';
+                this.innerHTML = '<i class="fas fa-thumbtack"></i> Unpin';
+                animateAchievements();
             } else {
                 // Unpin it
                 this.classList.remove('active');
                 achievementsSection.classList.remove('active');
-                this.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
+                this.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
             }
         });
     });
     
     // Initialize all achievement toggles with the trophy icon
     achievementToggles.forEach(toggle => {
-        toggle.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
+        toggle.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
     });
 });
