@@ -163,12 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(styleElement);
     
-    // Achievements toggle functionality
+    // Enhanced Achievements toggle functionality
     const achievementToggles = document.querySelectorAll('.achievements-toggle');
     
     achievementToggles.forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            // Toggle active class on button
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Toggle the active class on this button
             this.classList.toggle('active');
             
             // Find the achievements section that follows this button
@@ -177,12 +179,30 @@ document.addEventListener('DOMContentLoaded', function() {
             // Toggle the active class on the achievements section
             achievementsSection.classList.toggle('active');
             
-            // Update button text
+            // Update the button text based on its state with a more engaging label
             if (this.classList.contains('active')) {
-                this.innerHTML = 'Hide Achievements <i class="fas fa-chevron-up"></i>';
+                this.innerHTML = '<i class="fas fa-trophy"></i> Hide Key Achievements';
+                
+                // Add animation to each achievement item
+                const achievementItems = achievementsSection.querySelectorAll('.achievements-list li');
+                achievementItems.forEach((item, index) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(-10px)';
+                    item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateX(0)';
+                    }, 100 + (index * 120));
+                });
             } else {
-                this.innerHTML = 'View Achievements <i class="fas fa-chevron-down"></i>';
+                this.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
             }
         });
+    });
+    
+    // Initialize all achievement toggles with the trophy icon
+    achievementToggles.forEach(toggle => {
+        toggle.innerHTML = '<i class="fas fa-trophy"></i> View Key Achievements';
     });
 });
