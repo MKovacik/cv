@@ -236,10 +236,16 @@ ul {
     padding: 8px 16px;
     border-radius: 4px;
     font-size: 0.9rem;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-bottom: 5px;
     border-left: 3px solid var(--primary-color);
     transition: all 0.2s ease;
+}
+
+.skill-tag i {
+    margin-right: 8px;
+    color: var(--primary-color);
 }
 
 .skill-tag:hover {
