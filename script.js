@@ -3,19 +3,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryConfig = {
         "Techcelerate2024": {
             title: "Conference Presentation on Internal Techcelerate Conference in Kosice and AI Accelarate Conference in Budapest: Chatbot Factory",
-            path: "img/events/Techcelerate2024/"
+            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2024/"
         },
         "AllLeadsEssen2024": {
             title: "Conference Presentation on Internal All DTIT Management Conference in Essen: How to code with AI (500 leaders)",
-            path: "img/events/AllLeadsEssen2024/"
+            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/AllLeadsEssen2024/"
         },
         "WeAreDevelopers": {
             title: "Conference Presentation on WeAreDevelopers Conference in Berlin: How to code for visual impairment people (+workshop)",
-            path: "img/events/WeAreDevelopers/"
+            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/WeAreDevelopers/"
         },
         "Hackathons": {
             title: "Supported local developer communities",
-            path: "img/events/Hackathons/"
+            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Hackathons/"
         }
     };
     
