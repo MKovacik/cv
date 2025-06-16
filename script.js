@@ -2,6 +2,60 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
+    // Image switching functionality for mobile view
+    const profileImage = document.getElementById('profile-image');
+    const headerCompanyLogo = document.getElementById('header-company-logo');
+    
+    // Store original image sources
+    const profileImageSrc = profileImage.src;
+    const companyLogoSrc = headerCompanyLogo.src;
+    
+    // Function to check if device is mobile
+    const isMobileView = () => window.innerWidth <= 768;
+    
+    // Function to toggle between profile image and company logo
+    let showingProfile = true;
+    const toggleProfileImage = () => {
+        if (!isMobileView()) return; // Only run on mobile view
+        
+        if (showingProfile) {
+            // Switch to company logo
+            profileImage.src = companyLogoSrc;
+            profileImage.alt = "Deutsche Telekom Logo";
+        } else {
+            // Switch back to profile image
+            profileImage.src = profileImageSrc;
+            profileImage.alt = "Michal Kováčik";
+        }
+        showingProfile = !showingProfile;
+    };
+    
+    // Set interval for image switching on mobile
+    let imageToggleInterval;
+    
+    // Function to start or stop the image toggle based on screen size
+    const handleScreenSizeChange = () => {
+        if (isMobileView()) {
+            if (!imageToggleInterval) {
+                imageToggleInterval = setInterval(toggleProfileImage, 3000); // Switch every 3 seconds
+            }
+        } else {
+            // Reset to original images when not in mobile view
+            if (imageToggleInterval) {
+                clearInterval(imageToggleInterval);
+                imageToggleInterval = null;
+                profileImage.src = profileImageSrc;
+                profileImage.alt = "Michal Kováčik";
+            }
+        }
+    };
+    
+    // Initial check
+    handleScreenSizeChange();
+    
+    // Listen for window resize events
+    window.addEventListener('resize', handleScreenSizeChange);
+    
     // Print functionality removed as it's redundant with Download CV
     
     // Add animation to skill tags
