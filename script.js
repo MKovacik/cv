@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Image Gallery Configuration
+    const galleryConfig = {
+        "Techcelerate2024": {
+            title: "Conference Presentation on Internal Techcelerate Conference in Kosice and AI Accelarate Conference in Budapest: Chatbot Factory",
+            path: "img/events/Techcelerate2024/"
+        },
+        "AllLeadsEssen2024": {
+            title: "Conference Presentation on Internal All DTIT Management Conference in Essen: How to code with AI (500 leaders)",
+            path: "img/events/AllLeadsEssen2024/"
+        },
+        "WeAreDevelopers": {
+            title: "Conference Presentation on WeAreDevelopers Conference in Berlin: How to code for visual impairment people (+workshop)",
+            path: "img/events/WeAreDevelopers/"
+        },
+        "Hackathons": {
+            title: "Supported local developer communities",
+            path: "img/events/Hackathons/"
+        }
+    };
+    
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
     
@@ -371,5 +391,277 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize all achievement toggles with the trophy icon
     achievementToggles.forEach(toggle => {
         toggle.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
+    });
+    
+    // Image Gallery functionality
+    function createGalleryIcon(galleryId) {
+        if (!galleryConfig[galleryId]) return null;
+        
+        const galleryIcon = document.createElement('span');
+        galleryIcon.className = 'gallery-icon';
+        galleryIcon.innerHTML = '<i class="fas fa-images"></i><span class="gallery-icon-pulse"></span>';
+        
+        const galleryContainer = document.createElement('div');
+        galleryContainer.className = 'gallery-container';
+        
+        // Remove title element since we don't need text
+        
+        const galleryImages = document.createElement('div');
+        galleryImages.className = 'gallery-images';
+        galleryImages.innerHTML = '';
+        
+        // Use actual images from the directories
+        let eventImages = [];
+        
+        // Set up the actual images based on gallery ID
+        if (galleryId === 'Techcelerate2024') {
+            eventImages = [
+                { src: galleryConfig[galleryId].path + 'IMG_0552.jpeg', alt: 'Techcelerate Conference photo 1' },
+                { src: galleryConfig[galleryId].path + 'IMG_1123.jpeg', alt: 'Techcelerate Conference photo 2' }
+            ];
+        } else if (galleryId === 'AllLeadsEssen2024') {
+            eventImages = [
+                { src: galleryConfig[galleryId].path + 'IMG_8182.jpeg', alt: 'DTIT Management Conference photo 1' },
+                { src: galleryConfig[galleryId].path + 'IMG_8184.jpeg', alt: 'DTIT Management Conference photo 2' }
+            ];
+        } else if (galleryId === 'WeAreDevelopers') {
+            eventImages = [
+                { src: galleryConfig[galleryId].path + 'IMG_4641.jpeg', alt: 'WeAreDevelopers Conference photo 1' },
+                { src: galleryConfig[galleryId].path + 'IMG_9965.jpeg', alt: 'WeAreDevelopers Conference photo 2' },
+                { src: galleryConfig[galleryId].path + 'IMG_9970.jpeg', alt: 'WeAreDevelopers Conference photo 3' }
+            ];
+        } else if (galleryId === 'Hackathons') {
+            eventImages = [
+                { src: galleryConfig[galleryId].path + 'IMG_0135.jpeg', alt: 'Hackathon photo 1' },
+                { src: galleryConfig[galleryId].path + 'IMG_0137.jpeg', alt: 'Hackathon photo 2' },
+                { src: galleryConfig[galleryId].path + 'IMG_0140.jpeg', alt: 'Hackathon photo 3' }
+            ];
+        }
+        
+        // Create image elements
+        galleryImages.innerHTML = '';
+        eventImages.forEach((img, index) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = img.src;
+            imgElement.alt = img.alt;
+            imgElement.className = 'gallery-image';
+            imgElement.dataset.index = index;
+            imgElement.dataset.galleryId = galleryId;
+            
+            // Error handling for images that don't exist yet
+            imgElement.onerror = function() {
+                // Use a data URL for the placeholder instead of an external service
+                this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22150%22 height%3D%2280%22%3E%3Crect width%3D%22150%22 height%3D%2280%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%2275%22 y%3D%2240%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
+            };
+            
+            imgElement.addEventListener('click', function() {
+                openGalleryModal(galleryId, parseInt(this.dataset.index));
+            });
+            
+            galleryImages.appendChild(imgElement);
+        });
+        
+        // Only append the images container since we removed the title
+        galleryContainer.appendChild(galleryImages);
+        galleryIcon.appendChild(galleryContainer);
+        
+        return galleryIcon;
+    }
+    
+    // Create gallery modal for fullscreen viewing
+    function createGalleryModal() {
+        const modal = document.createElement('div');
+        modal.className = 'gallery-modal';
+        modal.id = 'gallery-modal';
+        
+        const modalContent = document.createElement('div');
+        modalContent.className = 'gallery-modal-content';
+        
+        const modalImage = document.createElement('img');
+        modalImage.className = 'gallery-modal-image';
+        modalImage.id = 'gallery-modal-image';
+        
+        const closeButton = document.createElement('button');
+        closeButton.className = 'gallery-modal-close';
+        closeButton.innerHTML = '<i class="fas fa-times"></i>';
+        closeButton.addEventListener('click', closeGalleryModal);
+        
+        const prevButton = document.createElement('div');
+        prevButton.className = 'gallery-modal-nav gallery-modal-prev';
+        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevButton.addEventListener('click', showPrevImage);
+        
+        const nextButton = document.createElement('div');
+        nextButton.className = 'gallery-modal-nav gallery-modal-next';
+        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextButton.addEventListener('click', showNextImage);
+        
+        modalContent.appendChild(modalImage);
+        modalContent.appendChild(closeButton);
+        modalContent.appendChild(prevButton);
+        modalContent.appendChild(nextButton);
+        modal.appendChild(modalContent);
+        
+        document.body.appendChild(modal);
+    }
+    
+    // Current gallery state
+    let currentGallery = '';
+    let currentIndex = 0;
+    
+    // Open gallery modal
+    function openGalleryModal(galleryId, index) {
+        const modal = document.getElementById('gallery-modal');
+        const modalImage = document.getElementById('gallery-modal-image');
+        
+        currentGallery = galleryId;
+        currentIndex = index;
+        
+        // Get the image path based on the gallery ID and index
+        let imagePath = '';
+        if (galleryId === 'Techcelerate2024') {
+            imagePath = index === 0 ? galleryConfig[galleryId].path + 'IMG_0552.jpeg' : galleryConfig[galleryId].path + 'IMG_1123.jpeg';
+        } else if (galleryId === 'AllLeadsEssen2024') {
+            imagePath = index === 0 ? galleryConfig[galleryId].path + 'IMG_8182.jpeg' : galleryConfig[galleryId].path + 'IMG_8184.jpeg';
+        } else if (galleryId === 'WeAreDevelopers') {
+            if (index === 0) imagePath = galleryConfig[galleryId].path + 'IMG_4641.jpeg';
+            else if (index === 1) imagePath = galleryConfig[galleryId].path + 'IMG_9965.jpeg';
+            else imagePath = galleryConfig[galleryId].path + 'IMG_9970.jpeg';
+        } else if (galleryId === 'Hackathons') {
+            if (index === 0) imagePath = galleryConfig[galleryId].path + 'IMG_0135.jpeg';
+            else if (index === 1) imagePath = galleryConfig[galleryId].path + 'IMG_0137.jpeg';
+            else imagePath = galleryConfig[galleryId].path + 'IMG_0140.jpeg';
+        }
+        
+        modalImage.src = imagePath;
+        modalImage.alt = 'Gallery image ' + (index + 1);
+        
+        // Error handling
+        modalImage.onerror = function() {
+            // Use a data URL for the placeholder instead of an external service
+            this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22800%22 height%3D%22600%22%3E%3Crect width%3D%22800%22 height%3D%22600%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%22400%22 y%3D%22300%22 font-family%3D%22Arial%22 font-size%3D%2224%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
+        };
+        
+        // Show the modal
+        modal.classList.add('active');
+        
+        // Prevent scrolling on the body
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Close gallery modal
+    function closeGalleryModal() {
+        const modal = document.getElementById('gallery-modal');
+        modal.classList.remove('active');
+        
+        // Re-enable scrolling
+        document.body.style.overflow = '';
+    }
+    
+    // Show previous image
+    function showPrevImage() {
+        if (!currentGallery) return;
+        
+        // Get the number of images for the current gallery
+        let imageCount = getImageCount(currentGallery);
+        currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+        openGalleryModal(currentGallery, currentIndex);
+    }
+    
+    // Show next image
+    function showNextImage() {
+        if (!currentGallery) return;
+        
+        // Get the number of images for the current gallery
+        let imageCount = getImageCount(currentGallery);
+        currentIndex = (currentIndex + 1) % imageCount;
+        openGalleryModal(currentGallery, currentIndex);
+    }
+    
+    // Helper function to get image count for a gallery
+    function getImageCount(galleryId) {
+        if (galleryId === 'Techcelerate2024') return 2;
+        if (galleryId === 'AllLeadsEssen2024') return 2;
+        if (galleryId === 'WeAreDevelopers') return 3;
+        if (galleryId === 'Hackathons') return 3;
+        return 1; // Default fallback
+    }
+    
+    // Add keyboard navigation for gallery
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('gallery-modal').classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+            closeGalleryModal();
+        } else if (e.key === 'ArrowLeft') {
+            showPrevImage();
+        } else if (e.key === 'ArrowRight') {
+            showNextImage();
+        }
+    });
+
+    // Create the gallery modal
+    createGalleryModal();
+
+    // Initialize gallery icons that are already in the HTML
+    const galleryIcons = {
+        'gallery-Techcelerate2024': 'Techcelerate2024',
+        'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
+        'gallery-WeAreDevelopers': 'WeAreDevelopers',
+        'gallery-Hackathons': 'Hackathons'
+    };
+
+    // Process each gallery icon
+    Object.keys(galleryIcons).forEach(iconId => {
+        const iconElement = document.getElementById(iconId);
+        if (iconElement) {
+            const galleryId = galleryIcons[iconId];
+            
+            // Create gallery container
+            const galleryContainer = document.createElement('div');
+            galleryContainer.className = 'gallery-container';
+            
+            // Add gallery title
+            const galleryTitle = document.createElement('div');
+            galleryTitle.className = 'gallery-title';
+            galleryTitle.textContent = galleryConfig[galleryId].title;
+            galleryContainer.appendChild(galleryTitle);
+            
+            // Create images container
+            const galleryImages = document.createElement('div');
+            galleryImages.className = 'gallery-images';
+            
+            // Add images based on gallery ID
+            let imagesToAdd = [];
+            if (galleryId === 'Techcelerate2024') {
+                imagesToAdd = ['IMG_0552.jpeg', 'IMG_1123.jpeg'];
+            } else if (galleryId === 'AllLeadsEssen2024') {
+                imagesToAdd = ['IMG_8182.jpeg', 'IMG_8184.jpeg'];
+            } else if (galleryId === 'WeAreDevelopers') {
+                imagesToAdd = ['IMG_4641.jpeg', 'IMG_9965.jpeg', 'IMG_9970.jpeg'];
+            } else if (galleryId === 'Hackathons') {
+                imagesToAdd = ['IMG_0135.jpeg', 'IMG_0137.jpeg', 'IMG_0140.jpeg'];
+            }
+            
+            // Create thumbnail images
+            imagesToAdd.forEach((imageName, index) => {
+                const img = document.createElement('img');
+                img.className = 'gallery-image';
+                img.src = galleryConfig[galleryId].path + imageName;
+                img.alt = galleryConfig[galleryId].title + ' image ' + (index + 1);
+                img.addEventListener('click', () => openGalleryModal(galleryId, index));
+                img.addEventListener('error', function() {
+                    this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22150%22 height%3D%2280%22%3E%3Crect width%3D%22150%22 height%3D%2280%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%2275%22 y%3D%2240%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
+                    this.alt = 'Image not available';
+                });
+                galleryImages.appendChild(img);
+            });
+            
+            galleryContainer.appendChild(galleryImages);
+            iconElement.appendChild(galleryContainer);
+            
+            // Add click event to open the first image in modal
+            iconElement.addEventListener('click', () => openGalleryModal(galleryId, 0));
+        }
     });
 });
