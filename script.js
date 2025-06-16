@@ -41,90 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Create a smaller version of the company logo for the profile image
-    const createSmallerLogo = () => {
-        const canvas = document.createElement('canvas');
-        const img = new Image();
-        
-        return new Promise((resolve) => {
-            img.onload = () => {
-                // Set canvas size to match profile image dimensions
-                canvas.width = 150;
-                canvas.height = 150;
-                const ctx = canvas.getContext('2d');
-                
-                // Create circular clipping path (to match the profile image border-radius)
-                ctx.beginPath();
-                ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.clip();
-                
-                // Fill with white background
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Calculate dimensions to maintain aspect ratio with better padding
-                const padding = 20; // Reduced padding for better fit
-                const maxWidth = canvas.width - (padding * 2);
-                const maxHeight = canvas.height - (padding * 2);
-                
-                let newWidth, newHeight;
-                
-                if (img.width / img.height > maxWidth / maxHeight) {
-                    // Image is wider than tall
-                    newWidth = maxWidth;
-                    newHeight = (img.height * maxWidth) / img.width;
-                } else {
-                    // Image is taller than wide
-                    newHeight = maxHeight;
-                    newWidth = (img.width * maxHeight) / img.height;
-                }
-                
-                // Center the image
-                const x = (canvas.width - newWidth) / 2;
-                const y = (canvas.height - newHeight) / 2;
-                
-                // Draw the image with the new dimensions
-                ctx.drawImage(img, x, y, newWidth, newHeight);
-                
-                // Get the data URL
-                resolve(canvas.toDataURL('image/png'));
-            };
-            
-            img.onerror = () => {
-                // If image fails to load, create a fallback with just the DT logo text
-                const ctx = canvas.getContext('2d');
-                
-                // Create circular clipping path
-                ctx.beginPath();
-                ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.clip();
-                
-                // Fill with white background
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Add text
-                ctx.fillStyle = '#e20074'; // Magenta color for Deutsche Telekom
-                ctx.font = 'bold 24px Arial';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('DT', canvas.width/2, canvas.height/2);
-                
-                resolve(canvas.toDataURL('image/png'));
-            };
-            
-            img.src = companyLogoSrc;
-        });
-    };
-    
-    // Store the smaller logo URL
-    let smallerLogoSrc = '';
-    createSmallerLogo().then(url => {
-        smallerLogoSrc = url;
-    });
-    
     // Function to toggle between profile image and company logo with simple cross-fade
     let showingProfile = true;
     let isAnimating = false;
@@ -141,16 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             if (showingProfile) {
                 // Switch to company logo
-                if (smallerLogoSrc) {
-                    profileImage.src = smallerLogoSrc;
-                } else {
-                    profileImage.src = companyLogoSrc;
-                }
+                profileImage.src = companyLogoSrc;
                 profileImage.alt = "Deutsche Telekom Logo";
+                profileImage.classList.add('company-logo-view'); // Add class for better logo display
             } else {
                 // Switch back to profile image
                 profileImage.src = profileImageSrc;
                 profileImage.alt = "Michal Kováčik";
+                profileImage.classList.remove('company-logo-view'); // Remove logo class
             }
             
             // Fade in
