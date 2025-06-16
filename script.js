@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Store original image sources
     const profileImageSrc = profileImage.src;
-    const companyLogoSrc = 'img/DTE.DE-944bd2b4.png'; // Direct path to company logo
+    const companyLogoSrc = 'https://media.githubusercontent.com/media/MKovacik/cv/main/img/DTE.DE-944bd2b4.png'; // GitHub LFS media URL for company logo
     
     // Function to check if device is mobile
     const isMobileView = () => window.innerWidth <= 768;
