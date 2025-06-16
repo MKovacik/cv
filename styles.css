@@ -110,8 +110,7 @@ header::before {
     object-fit: cover;
     border: 4px solid white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    animation: profileFadeIn 1s ease-out forwards;
+    transition: opacity 0.4s ease-in-out;
 }
 
 .profile-image:hover {
@@ -578,6 +577,44 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header-main-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .profile-info {
+        text-align: center;
+    }
+    
+    .profile-info h1 {
+        font-size: 2.2rem;
+    }
+    
+    .profile-info h2 {
+        font-size: 1.2rem;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .name-title-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    /* Hide company logo in header on mobile */
+    .company-logo-header {
+        display: none;
+    }
+    
+    /* Ensure profile image has white background for logo visibility */
+    .profile-image {
+        background-color: #ffffff;
+    }
+    
     .header-content {
         padding: 0 15px;
         flex-direction: column;

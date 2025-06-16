@@ -4,30 +4,117 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Image switching functionality for mobile view
     const profileImage = document.getElementById('profile-image');
-    const headerCompanyLogo = document.getElementById('header-company-logo');
     
     // Store original image sources
     const profileImageSrc = profileImage.src;
-    const companyLogoSrc = headerCompanyLogo.src;
+    const companyLogoSrc = 'img/DTE.DE-944bd2b4.png'; // Direct path to company logo
     
     // Function to check if device is mobile
     const isMobileView = () => window.innerWidth <= 768;
     
-    // Function to toggle between profile image and company logo
-    let showingProfile = true;
-    const toggleProfileImage = () => {
-        if (!isMobileView()) return; // Only run on mobile view
-        
-        if (showingProfile) {
-            // Switch to company logo
-            profileImage.src = companyLogoSrc;
-            profileImage.alt = "Deutsche Telekom Logo";
+    // Add a white background to the profile image container for better logo visibility
+    const addWhiteBackground = () => {
+        if (isMobileView()) {
+            profileImage.style.backgroundColor = '#ffffff';
         } else {
-            // Switch back to profile image
-            profileImage.src = profileImageSrc;
-            profileImage.alt = "Michal Kováčik";
+            profileImage.style.backgroundColor = '';
         }
-        showingProfile = !showingProfile;
+    };
+    
+    // Create a smaller version of the company logo for the profile image
+    const createSmallerLogo = () => {
+        const canvas = document.createElement('canvas');
+        const img = new Image();
+        
+        return new Promise((resolve) => {
+            img.onload = () => {
+                // Set canvas size to match profile image dimensions but slightly smaller
+                canvas.width = 150;
+                canvas.height = 150;
+                const ctx = canvas.getContext('2d');
+                
+                // Fill with white background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Calculate dimensions to maintain aspect ratio and add padding
+                const padding = 30; // Padding on each side
+                const maxWidth = canvas.width - (padding * 2);
+                const maxHeight = canvas.height - (padding * 2);
+                
+                let newWidth, newHeight;
+                
+                if (img.width / img.height > maxWidth / maxHeight) {
+                    // Image is wider than tall
+                    newWidth = maxWidth;
+                    newHeight = (img.height * maxWidth) / img.width;
+                } else {
+                    // Image is taller than wide
+                    newHeight = maxHeight;
+                    newWidth = (img.width * maxHeight) / img.height;
+                }
+                
+                // Center the image
+                const x = (canvas.width - newWidth) / 2;
+                const y = (canvas.height - newHeight) / 2;
+                
+                // Draw the image with the new dimensions
+                ctx.drawImage(img, x, y, newWidth, newHeight);
+                
+                // Get the data URL
+                resolve(canvas.toDataURL('image/png'));
+            };
+            
+            img.src = companyLogoSrc;
+        });
+    };
+    
+    // Store the smaller logo URL
+    let smallerLogoSrc = '';
+    createSmallerLogo().then(url => {
+        smallerLogoSrc = url;
+    });
+    
+    // Function to toggle between profile image and company logo with simple cross-fade
+    let showingProfile = true;
+    let isAnimating = false;
+    
+    const toggleProfileImage = () => {
+        if (!isMobileView() || isAnimating) return; // Only run on mobile view and when not already animating
+        
+        isAnimating = true;
+        
+        // Fade out
+        profileImage.style.opacity = '0';
+        
+        // Change the image when faded out
+        setTimeout(() => {
+            if (showingProfile) {
+                // Switch to company logo
+                if (smallerLogoSrc) {
+                    profileImage.src = smallerLogoSrc;
+                } else {
+                    profileImage.src = companyLogoSrc;
+                }
+                profileImage.alt = "Deutsche Telekom Logo";
+            } else {
+                // Switch back to profile image
+                profileImage.src = profileImageSrc;
+                profileImage.alt = "Michal Kováčik";
+            }
+            
+            // Fade in
+            setTimeout(() => {
+                profileImage.style.opacity = '1';
+                
+                // Reset after fade completes
+                setTimeout(() => {
+                    isAnimating = false;
+                    showingProfile = !showingProfile;
+                }, 400);
+            }, 50);
+            
+        }, 400); // Match the CSS transition duration
     };
     
     // Set interval for image switching on mobile
@@ -35,9 +122,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to start or stop the image toggle based on screen size
     const handleScreenSizeChange = () => {
+        addWhiteBackground(); // Add white background for better logo visibility
+        
         if (isMobileView()) {
             if (!imageToggleInterval) {
-                imageToggleInterval = setInterval(toggleProfileImage, 3000); // Switch every 3 seconds
+                imageToggleInterval = setInterval(toggleProfileImage, 2000); // Switch every 2 seconds
             }
         } else {
             // Reset to original images when not in mobile view
