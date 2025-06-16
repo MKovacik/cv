@@ -48,17 +48,23 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return new Promise((resolve) => {
             img.onload = () => {
-                // Set canvas size to match profile image dimensions but slightly smaller
+                // Set canvas size to match profile image dimensions
                 canvas.width = 150;
                 canvas.height = 150;
                 const ctx = canvas.getContext('2d');
+                
+                // Create circular clipping path (to match the profile image border-radius)
+                ctx.beginPath();
+                ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
                 
                 // Fill with white background
                 ctx.fillStyle = '#ffffff';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 
-                // Calculate dimensions to maintain aspect ratio and add padding
-                const padding = 30; // Padding on each side
+                // Calculate dimensions to maintain aspect ratio with better padding
+                const padding = 20; // Reduced padding for better fit
                 const maxWidth = canvas.width - (padding * 2);
                 const maxHeight = canvas.height - (padding * 2);
                 
@@ -82,6 +88,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 ctx.drawImage(img, x, y, newWidth, newHeight);
                 
                 // Get the data URL
+                resolve(canvas.toDataURL('image/png'));
+            };
+            
+            img.onerror = () => {
+                // If image fails to load, create a fallback with just the DT logo text
+                const ctx = canvas.getContext('2d');
+                
+                // Create circular clipping path
+                ctx.beginPath();
+                ctx.arc(canvas.width/2, canvas.height/2, canvas.width/2, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                
+                // Fill with white background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add text
+                ctx.fillStyle = '#e20074'; // Magenta color for Deutsche Telekom
+                ctx.font = 'bold 24px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('DT', canvas.width/2, canvas.height/2);
+                
                 resolve(canvas.toDataURL('image/png'));
             };
             
