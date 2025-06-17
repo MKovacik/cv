@@ -119,8 +119,11 @@ header::before {
 /* Style for company logo when displayed in profile spot */
 .profile-image.company-logo-view {
     object-fit: contain;
-    padding: 15px;
+    padding: 25px;
     background-color: white;
+    max-width: 100px;
+    max-height: 100px;
+    margin: 25px;
 }
 
 .profile-image:hover {
