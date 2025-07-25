@@ -338,16 +338,16 @@ function toggleTooltipContainer() {
         tooltipContainer.style.display = 'block';
         tooltipContainer.innerHTML = `
             <div class="tooltip-header">
-                <h3 class="tooltip-title">Site Guide</h3>
+                <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
                 <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="tooltip-content">
                 <p>Discover the interactive features of my CV:</p>
                 <ul>
-                    <li><strong>1. Leadership Qualities</strong>: Click on "Proven" to toggle proof details</li>
+                    <li><strong>1. Profile Page</strong>: Explore my detailed professional profile</li>
                     <li><strong>2. Achievements</strong>: Click "View Achievements" to see detailed accomplishments</li>
                     <li><strong>3. Photo Gallery</strong>: View images from my presentations and events</li>
-                    <li><strong>4. Profile Page</strong>: Explore my detailed professional profile</li>
+                    <li><strong>4. Leadership Qualities</strong>: Click on "Proven" to toggle proof details</li>
                 </ul>
             </div>
             <div class="tooltip-actions">
