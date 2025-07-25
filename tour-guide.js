@@ -400,7 +400,7 @@ function addProofToggleIndicator() {
     const proofToggles = document.querySelectorAll('.proof-label');
     if (proofToggles.length > 0) {
         proofToggles.forEach((toggle, index) => {
-            const indicator = createIndicator('1');
+            const indicator = createIndicator('4');
             positionIndicatorNear(indicator, toggle);
             
             indicator.setAttribute('data-feature', 'toggle');
@@ -448,7 +448,7 @@ function addProfilePageIndicator() {
     const profileLinks = document.querySelectorAll('.profile-photo a, a[href="profile.html"]');
     if (profileLinks.length > 0) {
         profileLinks.forEach((link, index) => {
-            const indicator = createIndicator('4');
+            const indicator = createIndicator('1');
             positionIndicatorNear(indicator, link);
             
             indicator.setAttribute('data-feature', 'profile');
