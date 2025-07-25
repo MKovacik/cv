@@ -344,9 +344,10 @@ function toggleTooltipContainer() {
             <div class="tooltip-content">
                 <p>Discover the interactive features of my CV:</p>
                 <ul>
-                    <li><strong>Leadership Qualities</strong>: Click on "Proven" to toggle proof details</li>
-                    <li><strong>Photo Gallery</strong>: View images from my presentations and events</li>
-                    <li><strong>Profile Page</strong>: Explore my detailed professional profile</li>
+                    <li><strong>1. Leadership Qualities</strong>: Click on "Proven" to toggle proof details</li>
+                    <li><strong>2. Achievements</strong>: Click "View Achievements" to see detailed accomplishments</li>
+                    <li><strong>3. Photo Gallery</strong>: View images from my presentations and events</li>
+                    <li><strong>4. Profile Page</strong>: Explore my detailed professional profile</li>
                 </ul>
             </div>
             <div class="tooltip-actions">
