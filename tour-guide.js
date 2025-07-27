@@ -476,10 +476,40 @@ function addFeatureIndicators() {
                 });
             }
             
-            // Add indicators for all found features
+            // Create a map to track element types for unique numbering
+            const elementTypeMap = new Map();
+            
+            // First, identify unique element types
+            featureMap.forEach((feature, key) => {
+                // For each feature type, get all unique element types
+                feature.elements.forEach(element => {
+                    // Create a unique identifier for this element type
+                    // Based on its tag name, classes, and position in the document
+                    const elementType = element.tagName + 
+                                       Array.from(element.classList).join('') + 
+                                       (element.getAttribute('id') || '');
+                    
+                    // If we haven't seen this element type before, assign it a number
+                    if (!elementTypeMap.has(elementType)) {
+                        elementTypeMap.set(elementType, {
+                            featureKey: key,
+                            number: feature.number
+                        });
+                    }
+                });
+            });
+            
+            // Now add indicators with unique numbers for each element type
             featureMap.forEach((feature, key) => {
                 feature.elements.forEach(element => {
-                    const indicator = createIndicator(feature.number.toString());
+                    // Get the element type identifier
+                    const elementType = element.tagName + 
+                                       Array.from(element.classList).join('') + 
+                                       (element.getAttribute('id') || '');
+                    
+                    // Use the unique number for this element type
+                    const uniqueNumber = elementTypeMap.get(elementType).number;
+                    const indicator = createIndicator(uniqueNumber.toString());
                     positionIndicatorNear(indicator, element);
                     indicator.setAttribute('data-feature', key);
                     indicator.setAttribute('data-tooltip', feature.tooltip);
