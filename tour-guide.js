@@ -328,6 +328,61 @@ function showHelpButton() {
 }
 
 /**
+ * Updates the Site Guide content based on available features
+ */
+function updateSiteGuideContent() {
+    // Feature descriptions for the guide
+    const featureDescriptions = {
+        'profile': 'Explore my detailed professional profile',
+        'achievements': 'Click "View Achievements" to see detailed accomplishments',
+        'gallery': 'View images from my presentations and events',
+        'toggle': 'Click on "Proven" to toggle proof details'
+    };
+    
+    // Feature titles for the guide
+    const featureTitles = {
+        'profile': 'Profile Page',
+        'achievements': 'Achievements',
+        'gallery': 'Photo Gallery',
+        'toggle': 'Leadership Qualities'
+    };
+    
+    // Store the dynamic content for later use
+    window.siteGuideContent = '';
+    
+    // Only proceed if we have the feature map
+    if (window.tourFeatureMap) {
+        let listItems = '';
+        
+        // Sort features by their assigned number
+        const sortedFeatures = Array.from(window.tourFeatureMap.entries())
+            .sort((a, b) => a[1].number - b[1].number);
+        
+        // Generate list items for each available feature
+        sortedFeatures.forEach(([key, feature]) => {
+            listItems += `<li><strong>${feature.number}. ${featureTitles[key]}</strong>: ${featureDescriptions[key]}</li>\n`;
+        });
+        
+        // Store the complete HTML content
+        window.siteGuideContent = `
+            <div class="tooltip-header">
+                <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
+                <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="tooltip-content">
+                <p>Discover the interactive features of my CV:</p>
+                <ul>
+                    ${listItems}
+                </ul>
+            </div>
+            <div class="tooltip-actions">
+                <button class="tooltip-button start-tour-button">Start Guided Tour</button>
+            </div>
+        `;
+    }
+}
+
+/**
  * Toggle the tooltip container visibility
  */
 function toggleTooltipContainer() {
@@ -336,24 +391,25 @@ function toggleTooltipContainer() {
     
     if (tooltipContainer.style.display === 'none') {
         tooltipContainer.style.display = 'block';
-        tooltipContainer.innerHTML = `
-            <div class="tooltip-header">
-                <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
-                <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="tooltip-content">
-                <p>Discover the interactive features of my CV:</p>
-                <ul>
-                    <li><strong>1. Profile Page</strong>: Explore my detailed professional profile</li>
-                    <li><strong>2. Achievements</strong>: Click "View Achievements" to see detailed accomplishments</li>
-                    <li><strong>3. Photo Gallery</strong>: View images from my presentations and events</li>
-                    <li><strong>4. Leadership Qualities</strong>: Click on "Proven" to toggle proof details</li>
-                </ul>
-            </div>
-            <div class="tooltip-actions">
-                <button class="tooltip-button start-tour-button">Start Guided Tour</button>
-            </div>
-        `;
+        
+        // Use dynamic content if available, otherwise use fallback
+        if (window.siteGuideContent) {
+            tooltipContainer.innerHTML = window.siteGuideContent;
+        } else {
+            tooltipContainer.innerHTML = `
+                <div class="tooltip-header">
+                    <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
+                    <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="tooltip-content">
+                    <p>Discover the interactive features of my CV:</p>
+                    <p>Loading available features...</p>
+                </div>
+                <div class="tooltip-actions">
+                    <button class="tooltip-button start-tour-button">Start Guided Tour</button>
+                </div>
+            `;
+        }
     } else {
         tooltipContainer.style.display = 'none';
     }
@@ -376,17 +432,66 @@ function addFeatureIndicators() {
     // Wait for DOM to be fully loaded with all elements
     setTimeout(() => {
         try {
-            // Add indicator for proof toggle functionality
-            addProofToggleIndicator();
+            // Initialize feature tracking
+            const featureMap = new Map();
+            let currentNumber = 1;
             
-            // Add indicator for achievements toggle functionality
-            addAchievementsToggleIndicator();
+            // Check for profile page links (priority 1)
+            const profileLinks = document.querySelectorAll('.profile-photo a, a[href="profile.html"]');
+            if (profileLinks.length > 0) {
+                featureMap.set('profile', {
+                    number: currentNumber++,
+                    elements: profileLinks,
+                    tooltip: 'Click to view my detailed profile page'
+                });
+            }
             
-            // Add indicator for gallery functionality
-            addGalleryIndicator();
+            // Check for achievements toggles (priority 2)
+            const achievementToggles = document.querySelectorAll('.achievements-toggle');
+            if (achievementToggles.length > 0) {
+                featureMap.set('achievements', {
+                    number: currentNumber++,
+                    elements: achievementToggles,
+                    tooltip: 'Click to view achievements. Try it!'
+                });
+            }
             
-            // Add indicator for profile page link
-            addProfilePageIndicator();
+            // Check for gallery icons (priority 3)
+            const galleryIcons = document.querySelectorAll('#gallery-Techcelerate2024, #gallery-AllLeadsEssen2024, #gallery-WeAreDevelopers, #gallery-Hackathons');
+            if (galleryIcons.length > 0) {
+                featureMap.set('gallery', {
+                    number: currentNumber++,
+                    elements: galleryIcons,
+                    tooltip: 'Click to view photo gallery from events'
+                });
+            }
+            
+            // Check for proof toggles (priority 4)
+            const proofToggles = document.querySelectorAll('.proof-label');
+            if (proofToggles.length > 0) {
+                featureMap.set('toggle', {
+                    number: currentNumber++,
+                    elements: proofToggles,
+                    tooltip: 'Click to toggle proof details. Try it!'
+                });
+            }
+            
+            // Add indicators for all found features
+            featureMap.forEach((feature, key) => {
+                feature.elements.forEach(element => {
+                    const indicator = createIndicator(feature.number.toString());
+                    positionIndicatorNear(indicator, element);
+                    indicator.setAttribute('data-feature', key);
+                    indicator.setAttribute('data-tooltip', feature.tooltip);
+                });
+            });
+            
+            // Store feature map for use in other functions
+            window.tourFeatureMap = featureMap;
+            
+            // Update the site guide with dynamic features
+            updateSiteGuideContent();
+            
         } catch (error) {
             console.error('Error adding feature indicators:', error);
         }
