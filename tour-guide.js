@@ -83,11 +83,7 @@ function setupTourEventListeners() {
             hideTooltipContainer();
         }
         
-        // Start tour button click
-        if (e.target.closest('.start-tour-button')) {
-            startGuidedTour();
-            hideTooltipContainer();
-        }
+
         
         // Feature indicator click
         if (e.target.closest('.feature-indicator')) {
@@ -177,11 +173,9 @@ function updateSiteGuideContent() {
                 <ul>
                     ${listItems}
                 </ul>
-                <p class="guide-note" style="font-size: 0.9rem; margin-top: 15px; padding: 10px; background-color: rgba(226, 0, 116, 0.05); border-radius: 8px;"><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> <strong>Tip:</strong> The numbered indicators will stay visible when you interact with buttons. When you click on achievements or proof toggles, the content will expand while keeping the indicators in place.</p>
+
             </div>
-            <div class="tooltip-actions">
-                <button class="tooltip-button start-tour-button">Start Guided Tour</button>
-            </div>
+
         `;
     }
 }
@@ -496,116 +490,6 @@ function showFeatureTooltip(indicator) {
             tooltip.remove();
         }, 300);
     }, 5000);
-}
-
-/**
- * Start the guided tour
- */
-function startGuidedTour() {
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'tour-overlay';
-    document.body.appendChild(overlay);
-    overlay.style.display = 'block';
-    
-    // Define tour steps
-    const tourSteps = [
-        {
-            element: '.proof-label',
-            title: 'Toggle Proof Details',
-            content: 'Click on "Proven" to expand and see detailed proof of each leadership quality.',
-            position: 'right'
-        },
-        {
-            element: '.achievements-toggle',
-            title: 'View Achievements',
-            content: 'Click on "View Achievements" to see detailed accomplishments for each position.',
-            position: 'right'
-        },
-        {
-            element: '#gallery-Techcelerate2024, #gallery-AllLeadsEssen2024, #gallery-WeAreDevelopers, #gallery-Hackathons',
-            title: 'Photo Gallery',
-            content: 'Click on gallery icons to view photos from presentations and events.',
-            position: 'top'
-        },
-        {
-            element: '.profile-photo a, a[href="profile.html"]',
-            title: 'Profile Page',
-            content: 'Click on my profile photo to visit my detailed profile page with additional information.',
-            position: 'bottom'
-        }
-    ];
-    
-    // Start the tour with the first step
-    showTourStep(tourSteps, 0, overlay);
-}
-
-/**
- * Show a specific tour step
- * @param {Array} steps - Array of tour step objects
- * @param {number} index - Current step index
- * @param {HTMLElement} overlay - Tour overlay element
- */
-function showTourStep(steps, index, overlay) {
-    // Remove previous highlights
-    const previousHighlight = document.querySelector('.highlight-element');
-    if (previousHighlight) {
-        previousHighlight.classList.remove('highlight-element');
-    }
-    
-    // If we've gone through all steps, end the tour
-    if (index >= steps.length) {
-        overlay.style.display = 'none';
-        setTimeout(() => {
-            overlay.remove();
-        }, 300);
-        return;
-    }
-    
-    const step = steps[index];
-    const element = document.querySelector(step.element);
-    
-    if (!element) {
-        // Skip this step if element not found
-        showTourStep(steps, index + 1, overlay);
-        return;
-    }
-    
-    // Highlight the current element
-    element.classList.add('highlight-element');
-    
-    // Create tooltip for this step
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip-container';
-    tooltip.style.position = 'absolute';
-    tooltip.style.display = 'block';
-    tooltip.style.width = '280px';
-    document.body.appendChild(tooltip);
-    
-    // Position tooltip based on specified position
-    positionTooltip(tooltip, element, step.position);
-    
-    // Set tooltip content
-    tooltip.innerHTML = `
-        <div class="tooltip-header">
-            <h3 class="tooltip-title">${step.title}</h3>
-        </div>
-        <div class="tooltip-content">
-            <p>${step.content}</p>
-        </div>
-        <div class="tooltip-actions">
-            <button class="tooltip-button next-step-button">
-                ${index === steps.length - 1 ? 'Finish Tour' : 'Next'}
-            </button>
-        </div>
-    `;
-    
-    // Add event listener for next button
-    const nextButton = tooltip.querySelector('.next-step-button');
-    nextButton.addEventListener('click', function() {
-        tooltip.remove();
-        showTourStep(steps, index + 1, overlay);
-    });
 }
 
 /**

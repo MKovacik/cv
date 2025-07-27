@@ -188,33 +188,4 @@
     visibility: visible;
 }
 
-/* Tour Overlay */
-.tour-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9990;
-    display: none;
-}
 
-/* Highlight Element */
-.highlight-element {
-    position: relative;
-    z-index: 9995;
-    animation: highlight-pulse 2s infinite;
-}
-
-@keyframes highlight-pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(226, 0, 116, 0.5);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(226, 0, 116, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(226, 0, 116, 0);
-    }
-}
