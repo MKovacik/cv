@@ -374,6 +374,7 @@ function updateSiteGuideContent() {
                 <ul>
                     ${listItems}
                 </ul>
+                <p class="guide-note" style="font-size: 0.9rem; margin-top: 15px; padding: 10px; background-color: rgba(226, 0, 116, 0.05); border-radius: 8px;"><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> <strong>Tip:</strong> The numbered indicators will stay visible when you interact with buttons. When you click on achievements or proof toggles, the content will expand while keeping the indicators in place.</p>
             </div>
             <div class="tooltip-actions">
                 <button class="tooltip-button start-tour-button">Start Guided Tour</button>
@@ -618,12 +619,30 @@ function positionIndicatorNear(indicator, target) {
     indicator.style.left = '0';
     indicator.style.marginLeft = '8px';
     indicator.style.display = 'inline-flex';
+    indicator.style.pointerEvents = 'none'; // Prevent indicator from interfering with clicks
     
-    // Insert the indicator right after the target element's text content
-    if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+    // Special handling for achievement buttons to prevent indicator from disappearing
+    if (target.classList.contains('achievements-toggle')) {
+        // For achievement buttons, create a wrapper span to hold the indicator
+        const wrapper = document.createElement('span');
+        wrapper.style.display = 'inline-block';
+        wrapper.style.pointerEvents = 'none';
+        wrapper.appendChild(indicator);
+        
+        // Insert after the text but before the chevron icon
+        const chevron = target.querySelector('i');
+        if (chevron) {
+            target.insertBefore(wrapper, chevron);
+        } else {
+            target.appendChild(wrapper);
+        }
+    } 
+    // For other buttons or links
+    else if (target.tagName === 'BUTTON' || target.tagName === 'A') {
         target.appendChild(indicator);
-    } else {
-        // For other elements, try to insert after the element
+    } 
+    // For other elements
+    else {
         target.parentNode.insertBefore(indicator, target.nextSibling);
     }
 }
