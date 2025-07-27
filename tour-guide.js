@@ -629,13 +629,12 @@ function positionIndicatorNear(indicator, target) {
         wrapper.style.pointerEvents = 'none';
         wrapper.appendChild(indicator);
         
-        // Insert after the text but before the chevron icon
-        const chevron = target.querySelector('i');
-        if (chevron) {
-            target.insertBefore(wrapper, chevron);
-        } else {
-            target.appendChild(wrapper);
-        }
+        // Insert before the button instead of inside it
+        target.parentNode.insertBefore(wrapper, target);
+        
+        // Adjust position to be vertically aligned
+        wrapper.style.verticalAlign = 'middle';
+        wrapper.style.marginRight = '5px';
     } 
     // For other buttons or links
     else if (target.tagName === 'BUTTON' || target.tagName === 'A') {
