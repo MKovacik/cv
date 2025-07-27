@@ -7,8 +7,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize tour system after a short delay to ensure all elements are loaded
-    setTimeout(initTourSystem, 1500);
+    // Initialize tour system immediately
+    initTourSystem();
     
     // Set up event listeners for tour-related elements
     setupTourEventListeners();
@@ -64,206 +64,9 @@ function createTourGuideElements() {
     tooltipContainer.className = 'tooltip-container';
     tooltipContainer.style.display = 'none';
     tourContainer.appendChild(tooltipContainer);
-    
-    // Add styles for tour elements
-    addTourStyles();
 }
 
-/**
- * Add CSS styles for tour elements
- */
-function addTourStyles() {
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .tour-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-            font-family: 'Roboto', 'Poppins', sans-serif;
-        }
-        
-        .help-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 10px rgba(226, 0, 116, 0.3);
-            cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .help-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(226, 0, 116, 0.4);
-        }
-        
-        .tooltip-container {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            width: 300px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: all 0.3s ease;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .tooltip-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .tooltip-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin: 0;
-            font-size: 1.2rem;
-        }
-        
-        .tooltip-close {
-            background: none;
-            border: none;
-            color: #999;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0;
-            transition: color 0.3s ease;
-        }
-        
-        .tooltip-close:hover {
-            color: var(--primary-color);
-        }
-        
-        .tooltip-content {
-            margin-bottom: 15px;
-        }
-        
-        .tooltip-content p {
-            margin: 0 0 10px;
-            line-height: 1.5;
-            color: #555;
-        }
-        
-        .tooltip-actions {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .tooltip-button {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: none;
-            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-            color: white;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tooltip-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(226, 0, 116, 0.2);
-        }
-        
-        .tooltip-button.secondary {
-            background: #f0f0f0;
-            color: #666;
-        }
-        
-        .feature-indicator {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(226, 0, 116, 0.3);
-            cursor: pointer;
-            animation: pulse 2s infinite;
-            z-index: 100;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(226, 0, 116, 0.5);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(226, 0, 116, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(226, 0, 116, 0);
-            }
-        }
-        
-        .feature-tooltip {
-            position: absolute;
-            background-color: white;
-            border-radius: 5px;
-            padding: 10px 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            color: #555;
-            max-width: 250px;
-            z-index: 101;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-tooltip.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .tour-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 9990;
-            display: none;
-        }
-        
-        .highlight-element {
-            position: relative;
-            z-index: 9995;
-            animation: highlight-pulse 2s infinite;
-        }
-        
-        @keyframes highlight-pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(226, 0, 116, 0.5);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(226, 0, 116, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(226, 0, 116, 0);
-            }
-        }
-    `;
-    document.head.appendChild(styleElement);
-}
+
 
 /**
  * Set up event listeners for tour elements
@@ -430,9 +233,8 @@ function hideTooltipContainer() {
  * Add indicators for key features
  */
 function addFeatureIndicators() {
-    // Wait for DOM to be fully loaded with all elements
-    setTimeout(() => {
-        try {
+    // Add feature indicators immediately
+    try {
             // Initialize feature tracking
             const featureMap = new Map();
             let currentNumber = 1;
@@ -526,7 +328,6 @@ function addFeatureIndicators() {
         } catch (error) {
             console.error('Error adding feature indicators:', error);
         }
-    }, 1000);
 }
 
 /**
@@ -621,8 +422,23 @@ function positionIndicatorNear(indicator, target) {
     indicator.style.display = 'inline-flex';
     indicator.style.pointerEvents = 'none'; // Prevent indicator from interfering with clicks
     
+    // Special handling for gallery icons - place indicator before the icon
+    if (target.classList.contains('gallery-icon')) {
+        // Create a wrapper span to hold the indicator
+        const wrapper = document.createElement('span');
+        wrapper.style.display = 'inline-block';
+        wrapper.style.pointerEvents = 'none';
+        wrapper.appendChild(indicator);
+        
+        // Insert before the gallery icon
+        target.parentNode.insertBefore(wrapper, target);
+        
+        // Adjust position to be vertically aligned
+        wrapper.style.verticalAlign = 'middle';
+        wrapper.style.marginRight = '5px';
+    }
     // Special handling for achievement buttons to prevent indicator from disappearing
-    if (target.classList.contains('achievements-toggle')) {
+    else if (target.classList.contains('achievements-toggle')) {
         // For achievement buttons, create a wrapper span to hold the indicator
         const wrapper = document.createElement('span');
         wrapper.style.display = 'inline-block';
