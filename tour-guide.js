@@ -611,12 +611,21 @@ function createIndicator(number) {
  * @param {HTMLElement} target - The target element to position near
  */
 function positionIndicatorNear(indicator, target) {
-    const rect = target.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    // Make the indicator an inline element by appending it to the target
+    // This ensures it moves with the target when content expands/collapses
+    indicator.style.position = 'relative';
+    indicator.style.top = '0';
+    indicator.style.left = '0';
+    indicator.style.marginLeft = '8px';
+    indicator.style.display = 'inline-flex';
     
-    indicator.style.top = (rect.top + scrollTop - 10) + 'px';
-    indicator.style.left = (rect.right + scrollLeft + 5) + 'px';
+    // Insert the indicator right after the target element's text content
+    if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+        target.appendChild(indicator);
+    } else {
+        // For other elements, try to insert after the element
+        target.parentNode.insertBefore(indicator, target.nextSibling);
+    }
 }
 
 /**
