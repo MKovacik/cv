@@ -366,7 +366,7 @@ function updateSiteGuideContent() {
         // Store the complete HTML content
         window.siteGuideContent = `
             <div class="tooltip-header">
-                <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
+                <h3 class="tooltip-title"><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Site Guide</h3>
                 <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="tooltip-content">
@@ -398,7 +398,7 @@ function toggleTooltipContainer() {
         } else {
             tooltipContainer.innerHTML = `
                 <div class="tooltip-header">
-                    <h3 class="tooltip-title"><i class="fas fa-info-circle"></i> Site Guide</h3>
+                    <h3 class="tooltip-title"><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Site Guide</h3>
                     <button class="tooltip-close" aria-label="Close"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="tooltip-content">
