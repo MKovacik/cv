@@ -46,6 +46,24 @@
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Pulsing i icon */
+.help-button i {
+    animation: pulse-icon 2s infinite;
+}
+
+@keyframes pulse-icon {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .help-button:hover {

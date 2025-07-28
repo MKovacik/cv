@@ -133,7 +133,7 @@ function updateSiteGuideContent() {
     // Feature descriptions for the guide
     const featureDescriptions = {
         'profile': 'Explore my detailed professional profile',
-        'achievements': 'Click "View Achievements" to see detailed accomplishments',
+        'achievements': 'Click "Achievements" to see detailed accomplishments',
         'gallery': 'View images from my presentations and events',
         'toggle': 'Click on "Proven" to toggle proof details'
     };
