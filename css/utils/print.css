@@ -1,0 +1,247 @@
+/**
+ * Print Utility Styles
+ * Print-specific styling and optimizations
+ */
+
+@media print {
+    /* Reset and Base Print Styles */
+    * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        background-color: white !important;
+        color: black !important;
+    }
+
+    /* Typography for Print */
+    h1 { font-size: 18pt; font-weight: bold; }
+    h2 { font-size: 16pt; font-weight: bold; }
+    h3 { font-size: 14pt; font-weight: bold; }
+    h4, h5, h6 { font-size: 12pt; font-weight: bold; }
+
+    /* Hide Interactive Elements */
+    .print-button,
+    .download-button,
+    .scroll-indicator,
+    .gallery-icon,
+    .achievements-toggle,
+    .back-button,
+    button,
+    nav,
+    .navigation {
+        display: none !important;
+    }
+
+    /* Header Adjustments */
+    header {
+        padding: 20px 0 !important;
+        margin-bottom: 20px !important;
+        background: none !important;
+        color: black !important;
+        box-shadow: none !important;
+        page-break-after: avoid;
+    }
+
+    .profile-image {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        max-width: 120px !important;
+        max-height: 120px !important;
+    }
+
+    .profile-photo::before {
+        display: none !important;
+    }
+
+    /* Layout Adjustments */
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .section {
+        margin-bottom: 15pt !important;
+        page-break-inside: avoid;
+        border-bottom: 1px solid #ccc !important;
+        padding-bottom: 10pt !important;
+    }
+
+    main {
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    /* Achievements - Show All */
+    .achievements-section {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        margin-top: 10pt !important;
+        margin-bottom: 10pt !important;
+        background-color: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+
+    .achievements-section h6 {
+        margin-top: 5pt !important;
+        margin-bottom: 5pt !important;
+        font-weight: bold !important;
+    }
+
+    .achievements-list li {
+        margin-bottom: 3pt !important;
+        font-size: 10pt;
+        page-break-inside: avoid;
+    }
+
+    /* Links */
+    a {
+        text-decoration: underline;
+        color: black !important;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+    }
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after,
+    a[href^="mailto:"]:after {
+        content: "";
+    }
+
+    /* Tables */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 4pt;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0 !important;
+        font-weight: bold;
+    }
+
+    /* Images */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+    }
+
+    /* Page Breaks */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    p, blockquote, ul, ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    blockquote, ul, ol {
+        page-break-inside: avoid;
+    }
+
+    /* Skills and Experience */
+    .skill-tag {
+        border: 1px solid #ccc !important;
+        background-color: #f9f9f9 !important;
+        color: black !important;
+        display: inline-block !important;
+        margin: 2pt !important;
+        padding: 2pt 4pt !important;
+    }
+
+    .experience-item,
+    .project-item {
+        page-break-inside: avoid;
+        margin-bottom: 10pt !important;
+    }
+
+    .company-logo-container {
+        display: none !important;
+    }
+
+    /* Footer */
+    footer {
+        display: none !important;
+    }
+
+    /* Page Margins */
+    @page {
+        margin: 0.5in;
+        size: A4;
+    }
+
+    /* Ensure readable text size */
+    .small-text {
+        font-size: 9pt !important;
+    }
+
+    /* Contact Information */
+    .contact-info {
+        font-size: 10pt !important;
+        margin: 5pt 0 !important;
+    }
+
+    .contact-info a:after {
+        content: none !important;
+    }
+
+    /* Gallery - Hide completely */
+    .gallery-container,
+    .gallery-modal,
+    .gallery-images {
+        display: none !important;
+    }
+
+    /* Ensure content fits */
+    .long-content {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* QR Code or similar (if added) */
+    .qr-code {
+        max-width: 100px !important;
+        max-height: 100px !important;
+    }
+}
+
+/* Print Preview Utilities (for screen) */
+@media screen {
+    .print-preview {
+        max-width: 8.5in;
+        min-height: 11in;
+        margin: 0 auto;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 0.5in;
+    }
+    
+    .print-preview * {
+        color: black !important;
+        background: transparent !important;
+    }
+}

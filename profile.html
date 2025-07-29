@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michal Kováčik - Profile</title>
-    <link rel="stylesheet" href="profile-styles.css">
-    <link rel="stylesheet" href="leadership-styles.css">
-    <link rel="stylesheet" href="tour-guide.css">
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body class="profile-page">
     <div class="container">
         <header>
             <a href="index.html" class="back-button">
@@ -25,7 +24,7 @@
             <section class="hero-section">
                 <div class="profile-card">
                     <div class="profile-image-container">
-                        <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/MK_Formal_01.jpg" alt="Michal Kováčik" class="profile-image">
+                        <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/MK_Formal_01.jpg" alt="Michal Kováčik" class="profile-image" id="profile-image">
                     </div>
                     <h1 class="name">Michal Kováčik</h1>
                     <h2 class="title">AI Strategy, Vision, and Implementation Leader</h2>
@@ -242,8 +241,6 @@
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="profile-script.js"></script>
-    <script src="leadership-script.js"></script>
-    <script src="tour-guide.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

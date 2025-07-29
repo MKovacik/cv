@@ -1,611 +1,660 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Image Gallery Configuration
-    const galleryConfig = {
-        "Techcelerate2024": {
-            title: "Conference Presentation on Internal Techcelerate Conference in Kosice and AI Accelarate Conference in Budapest: Chatbot Factory",
-            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2024/"
-        },
-        "AllLeadsEssen2024": {
-            title: "Conference Presentation on Internal All DTIT Management Conference in Essen: How to code with AI (500 leaders)",
-            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/AllLeadsEssen2024/"
-        },
-        "WeAreDevelopers": {
-            title: "Conference Presentation on WeAreDevelopers Conference in Berlin: How to code for visual impairment people (+workshop)",
-            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/WeAreDevelopers/"
-        },
-        "Hackathons": {
-            title: "Supported local developer communities",
-            path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Hackathons/"
-        }
-    };
+/**
+ * CV Application Entry Point
+ * Loads the modular system with fallback for older browsers
+ */
+
+// Check if ES6 modules are supported
+function supportsModules() {
+    try {
+        new Function('import("")');
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
+// Load the modular system
+async function loadModularSystem() {
+    try {
+        const { default: cvApp } = await import('./js/core/main.js');
+        console.log('✅ CV Application loaded successfully');
+        return true;
+    } catch (error) {
+        console.warn('⚠️ Failed to load modular system:', error);
+        return false;
+    }
+}
+
+// Check if CSS loaded properly
+function checkCSSLoaded() {
+    try {
+        // Create a test element to check if CSS variables are working
+        const testElement = document.createElement('div');
+        testElement.style.position = 'absolute';
+        testElement.style.visibility = 'hidden';
+        testElement.className = 'container';
+        document.body.appendChild(testElement);
+        
+        const styles = window.getComputedStyle(testElement);
+        const maxWidth = styles.maxWidth;
+        const padding = styles.padding || styles.paddingLeft;
+        
+        document.body.removeChild(testElement);
+        
+        // Check if the container styles are applied (max-width should be 900px from container.css)
+        const hasContainerStyles = maxWidth && maxWidth !== 'none' && maxWidth !== 'auto';
+        const hasPadding = padding && padding !== '0px';
+        
+        console.log('CSS Check - maxWidth:', maxWidth, 'padding:', padding, 'hasStyles:', hasContainerStyles || hasPadding);
+        
+        return hasContainerStyles || hasPadding;
+    } catch (error) {
+        console.warn('CSS check failed:', error);
+        return false;
+    }
+}
+
+// Comprehensive fallback for when modular system fails
+function basicFallback() {
+    console.log('🔄 Using comprehensive fallback for essential functionality');
+    
+    // Apply basic styles if modular CSS fails
+    function applyBasicStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Force correct colors */
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+            
+            html {
+                background-color: #ffffff !important;
+            }
+            
+            body {
+                font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+                background-color: #ffffff !important;
+                color: #333333 !important;
+                line-height: 1.6 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                min-height: 100vh !important;
+            }
+            
+            .container {
+                max-width: 900px !important;
+                margin: 0 auto !important;
+                padding: 20px !important;
+                background-color: #ffffff !important;
+                color: #333333 !important;
+            }
+            
+            header, main, footer {
+                background-color: #ffffff !important;
+                color: #333333 !important;
+            }
+            
+            header {
+                padding: 20px 0 !important;
+                border-bottom: 1px solid #eeeeee !important;
+                margin-bottom: 30px !important;
+            }
+            
+            .header-content {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+            
+            .header-main-content {
+                display: flex !important;
+                align-items: center !important;
+                gap: 20px !important;
+            }
+            
+            .profile-photo img {
+                width: 120px !important;
+                height: 120px !important;
+                border-radius: 50% !important;
+                object-fit: cover !important;
+            }
+            
+            .contact-info {
+                background: #f9f9f9 !important;
+                padding: 15px !important;
+                border-radius: 8px !important;
+                color: #333333 !important;
+            }
+            
+            .contact-info p {
+                margin: 5px 0 !important;
+                color: #333333 !important;
+            }
+            
+            .section {
+                margin-bottom: 40px !important;
+                padding-bottom: 30px !important;
+                border-bottom: 1px solid #eeeeee !important;
+                background-color: #ffffff !important;
+                color: #333333 !important;
+            }
+            
+            .section:last-child {
+                border-bottom: none !important;
+            }
+            
+            h1, h2, h3, h4, h5, h6 {
+                color: #333333 !important;
+                margin-bottom: 16px !important;
+                font-weight: 600 !important;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+                color: #e20074 !important;
+            }
+            
+            h2 {
+                font-size: 1.8rem !important;
+                color: #e20074 !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+                color: #e20074 !important;
+                border-bottom: 2px solid #e20074 !important;
+                padding-bottom: 8px !important;
+            }
+            
+            p, li {
+                color: #333333 !important;
+                line-height: 1.6 !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .experience-item {
+                margin-bottom: 30px !important;
+                background: #f9f9f9 !important;
+                padding: 20px !important;
+                border-radius: 8px !important;
+                color: #333333 !important;
+            }
+            
+            .company-header {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                margin-bottom: 15px !important;
+                color: #333333 !important;
+            }
+            
+            .position {
+                margin-bottom: 20px !important;
+                color: #333333 !important;
+            }
+            
+            .achievements-section {
+                max-height: 0 !important;
+                overflow: hidden !important;
+                transition: max-height 0.4s ease !important;
+                background-color: #ffffff !important;
+                color: #333333 !important;
+                opacity: 0 !important;
+            }
+            
+            .achievements-section.expanded {
+                max-height: 2000px !important;
+                margin-top: 20px !important;
+                opacity: 1 !important;
+                padding: 20px !important;
+                background: #f5f5f5 !important;
+                border-radius: 8px !important;
+            }
+            
+            .achievements-toggle {
+                background: #e20074 !important;
+                color: white !important;
+                border: none !important;
+                padding: 12px 24px !important;
+                border-radius: 25px !important;
+                cursor: pointer !important;
+                margin-top: 16px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                transition: all 0.3s ease !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+            }
+            
+            .achievements-toggle:hover {
+                background: #990050 !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 4px 12px rgba(226, 0, 116, 0.3) !important;
+            }
+            
+            .achievements-list {
+                list-style: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .achievements-list li {
+                margin-bottom: 12px !important;
+                padding-left: 20px !important;
+                position: relative !important;
+                color: #333333 !important;
+                line-height: 1.6 !important;
+            }
+            
+            .achievements-list li::before {
+                content: "★" !important;
+                position: absolute !important;
+                left: 0 !important;
+                color: #e20074 !important;
+                font-weight: bold !important;
+            }
+            
+            .gallery-icon {
+                color: #e20074 !important;
+                cursor: pointer !important;
+                text-decoration: underline !important;
+                font-weight: 500 !important;
+            }
+            
+            .gallery-icon:hover {
+                color: #990050 !important;
+            }
+            
+            .skills-grid {
+                display: flex !important;
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+                margin-bottom: 20px !important;
+            }
+            
+            .skill-tag {
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                padding: 8px 16px !important;
+                background: #f5f5f5 !important;
+                color: #333333 !important;
+                border: 1px solid #e0e0e0 !important;
+                border-radius: 20px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                transition: all 0.2s ease !important;
+            }
+            
+            .skill-tag:hover {
+                transform: translateY(-2px) scale(1.05) !important;
+                background: #e20074 !important;
+                color: white !important;
+                box-shadow: 0 4px 12px rgba(226, 0, 116, 0.3) !important;
+            }
+            
+            a {
+                color: #e20074 !important;
+                text-decoration: none !important;
+            }
+            
+            a:hover {
+                color: #990050 !important;
+                text-decoration: underline !important;
+            }
+            
+            footer {
+                text-align: center !important;
+                padding: 30px 0 !important;
+                border-top: 1px solid #eeeeee !important;
+                margin-top: 50px !important;
+                background-color: #ffffff !important;
+                color: #666666 !important;
+            }
+            
+            /* Responsive */
+            @media (max-width: 768px) {
+                .container {
+                    padding: 15px !important;
+                }
+                
+                .header-main-content {
+                    flex-direction: column !important;
+                    text-align: center !important;
+                }
+                
+                .profile-photo img {
+                    width: 100px !important;
+                    height: 100px !important;
+                }
+                
+                h1 {
+                    font-size: 2rem !important;
+                }
+                
+                .skills-grid {
+                    justify-content: center !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        console.log('✅ Comprehensive fallback styles applied');
+    }
+    
+    // Apply basic styles immediately
+    applyBasicStyles();
     
     // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
     
-    // Image switching functionality for mobile view
-    const profileImage = document.getElementById('profile-image');
-    
-    // Store original image sources
-    const profileImageSrc = profileImage.src;
-    const companyLogoSrc = 'https://media.githubusercontent.com/media/MKovacik/cv/main/img/DTE.DE-944bd2b4.png'; // GitHub LFS media URL for company logo
-    
-    // Function to check if device is mobile
-    const isMobileView = () => window.innerWidth <= 768;
-    
-    // Add a white background to the profile image container for better logo visibility
-    const addWhiteBackground = () => {
-        if (isMobileView()) {
-            profileImage.style.backgroundColor = '#ffffff';
-        } else {
-            profileImage.style.backgroundColor = '';
-        }
-    };
-    
-    // Function to toggle between profile image and company logo with simple cross-fade
-    let showingProfile = true;
-    let isAnimating = false;
-    
-    const toggleProfileImage = () => {
-        if (!isMobileView() || isAnimating) return; // Only run on mobile view and when not already animating
-        
-        isAnimating = true;
-        
-        // Fade out
-        profileImage.style.opacity = '0';
-        
-        // Change the image when faded out
-        setTimeout(() => {
-            if (showingProfile) {
-                // Switch to company logo
-                profileImage.src = companyLogoSrc;
-                profileImage.alt = "Deutsche Telekom Logo";
-                profileImage.classList.add('company-logo-view'); // Add class for better logo display
-            } else {
-                // Switch back to profile image
-                profileImage.src = profileImageSrc;
-                profileImage.alt = "Michal Kováčik";
-                profileImage.classList.remove('company-logo-view'); // Remove logo class
-            }
-            
-            // Fade in
-            setTimeout(() => {
-                profileImage.style.opacity = '1';
+    // Achievement toggles functionality
+    function initAchievements() {
+        const achievementButtons = document.querySelectorAll('.achievements-toggle');
+        achievementButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const achievementSection = this.nextElementSibling;
+                const icon = this.querySelector('i');
                 
-                // Reset after fade completes
-                setTimeout(() => {
-                    isAnimating = false;
-                    showingProfile = !showingProfile;
-                }, 400);
-            }, 50);
-            
-        }, 400); // Match the CSS transition duration
-    };
-    
-    // Set interval for image switching on mobile
-    let imageToggleInterval;
-    
-    // Function to start or stop the image toggle based on screen size
-    const handleScreenSizeChange = () => {
-        addWhiteBackground(); // Add white background for better logo visibility
-        
-        if (isMobileView()) {
-            if (!imageToggleInterval) {
-                imageToggleInterval = setInterval(toggleProfileImage, 2000); // Switch every 2 seconds
-            }
-        } else {
-            // Reset to original images when not in mobile view
-            if (imageToggleInterval) {
-                clearInterval(imageToggleInterval);
-                imageToggleInterval = null;
-                profileImage.src = profileImageSrc;
-                profileImage.alt = "Michal Kováčik";
-            }
-        }
-    };
-    
-    // Initial check
-    handleScreenSizeChange();
-    
-    // Listen for window resize events
-    window.addEventListener('resize', handleScreenSizeChange);
-    
-    // Print functionality removed as it's redundant with Download CV
-    
-    // Add animation to skill tags
-    const skillTags = document.querySelectorAll('.skill-tag');
-    skillTags.forEach((tag, index) => {
-        tag.style.opacity = '0';
-        tag.style.transform = 'translateY(10px)';
-        tag.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        
-        setTimeout(() => {
-            tag.style.opacity = '1';
-            tag.style.transform = 'translateY(0)';
-        }, 100 + (index * 50));
-    });
-    
-    // Add animation to experience items
-    const experienceItems = document.querySelectorAll('.experience-item');
-    experienceItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transition = 'opacity 0.5s ease';
-        
-        setTimeout(() => {
-            item.style.opacity = '1';
-        }, 300 + (index * 150));
-    });
-    
-    // Add animation to positions within experience items
-    const positions = document.querySelectorAll('.position');
-    positions.forEach((position, index) => {
-        position.style.opacity = '0';
-        position.style.transition = 'opacity 0.4s ease';
-        
-        setTimeout(() => {
-            position.style.opacity = '1';
-        }, 400 + (index * 100));
-    });
-    
-    // Add Telekom-themed scroll indicator
-    const scrollIndicator = document.createElement('div');
-    scrollIndicator.classList.add('scroll-indicator');
-    document.body.appendChild(scrollIndicator);
-    
-    window.addEventListener('scroll', () => {
-        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (window.scrollY / windowHeight) * 100;
-        scrollIndicator.style.width = scrolled + '%';
-        scrollIndicator.style.background = `var(--primary-color)`;
-    });
-    
-    // Add download CV as PDF button
-    const downloadButton = document.createElement('button');
-    downloadButton.textContent = 'Download CV';
-    downloadButton.id = 'download-button';
-    downloadButton.classList.add('download-button');
-    downloadButton.addEventListener('click', () => {
-        // Temporarily show all achievements sections for printing
-        const achievementsSections = document.querySelectorAll('.achievements-section');
-        const achievementToggles = document.querySelectorAll('.achievements-toggle');
-        
-        // Store original states to restore after printing
-        const originalStates = [];
-        achievementsSections.forEach((section, index) => {
-            originalStates.push({
-                sectionHasActiveClass: section.classList.contains('active'),
-                toggleHasActiveClass: achievementToggles[index] ? achievementToggles[index].classList.contains('active') : false,
-                toggleHTML: achievementToggles[index] ? achievementToggles[index].innerHTML : ''
+                if (achievementSection && achievementSection.classList.contains('achievements-section')) {
+                    achievementSection.classList.toggle('expanded');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                }
             });
+        });
+    }
+    
+    // Gallery functionality
+    function initGallery() {
+        const galleryIcons = document.querySelectorAll('.gallery-icon');
+        galleryIcons.forEach(icon => {
+            icon.style.cursor = 'pointer';
+            icon.style.textDecoration = 'underline';
+            icon.style.color = '#e20074';
+            icon.innerHTML = '📸 View Gallery';
             
-            // Make all achievements visible for printing
-            section.classList.add('print-visible');
+            icon.addEventListener('click', function() {
+                const galleryId = this.id.replace('gallery-', '');
+                alert(`Gallery: ${galleryId}\n\nThis would show images from the ${galleryId} gallery.`);
+            });
+        });
+    }
+    
+    // Profile functionality
+    function initProfile() {
+        const profileImages = document.querySelectorAll('.profile-image');
+        profileImages.forEach(img => {
+            img.addEventListener('error', function() {
+                console.warn('Profile image failed to load');
+            });
+        });
+    }
+    
+    // Proof toggle functionality for leadership qualities (profile page)
+    function initProofToggles() {
+        // Simple approach: find all proof-status buttons and make them clickable
+        const provenButtons = document.querySelectorAll('.proof-status');
+        console.log('Found proven buttons:', provenButtons.length);
+        
+        provenButtons.forEach((button, index) => {
+            button.style.cursor = 'pointer';
+            button.style.transition = 'all 0.3s ease';
+            
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Find the proof content - it's in the same .quality-proof container
+                const qualityProof = this.closest('.quality-proof');
+                const proofContent = qualityProof.querySelector('.proof-content');
+                const chevronIcon = qualityProof.querySelector('.fa-chevron-down, .fa-chevron-up');
+                
+                if (proofContent) {
+                    const isVisible = proofContent.style.display === 'block';
+                    
+                    if (!isVisible) {
+                        // Show content
+                        proofContent.style.display = 'block';
+                        proofContent.style.maxHeight = 'none';
+                        proofContent.style.opacity = '1';
+                        proofContent.style.padding = '16px';
+                        proofContent.style.backgroundColor = '#f9f9f9';
+                        proofContent.style.borderRadius = '8px';
+                        proofContent.style.marginTop = '12px';
+                        proofContent.style.border = '1px solid #e0e0e0';
+                        
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-down');
+                            chevronIcon.classList.add('fa-chevron-up');
+                        }
+                        
+                        this.style.backgroundColor = '#990050';
+                    } else {
+                        // Hide content
+                        proofContent.style.display = 'none';
+                        proofContent.style.maxHeight = '0';
+                        proofContent.style.opacity = '0';
+                        proofContent.style.padding = '0';
+                        
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-up');
+                            chevronIcon.classList.add('fa-chevron-down');
+                        }
+                        
+                        this.style.backgroundColor = '#e20074';
+                    }
+                    
+                    console.log('Toggled proof content for button', index);
+                }
+            });
         });
         
-        // Print the document
-        window.print();
-        
-        // Restore original states after printing
-        setTimeout(() => {
-            achievementsSections.forEach((section, index) => {
-                section.classList.remove('print-visible');
+        // Also try checkbox approach as backup
+        const checkboxes = document.querySelectorAll('.proof-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const qualityProof = this.closest('.quality-proof');
+                const proofContent = qualityProof.querySelector('.proof-content');
                 
-                // Restore original state
-                if (!originalStates[index].sectionHasActiveClass) {
-                    section.classList.remove('active');
-                }
-                
-                if (achievementToggles[index]) {
-                    if (!originalStates[index].toggleHasActiveClass) {
-                        achievementToggles[index].classList.remove('active');
+                if (proofContent) {
+                    if (this.checked) {
+                        proofContent.style.display = 'block';
+                        proofContent.style.padding = '16px';
+                        proofContent.style.backgroundColor = '#f9f9f9';
+                        proofContent.style.borderRadius = '8px';
+                        proofContent.style.marginTop = '12px';
+                    } else {
+                        proofContent.style.display = 'none';
+                        proofContent.style.padding = '0';
                     }
-                    achievementToggles[index].innerHTML = originalStates[index].toggleHTML;
                 }
             });
-        }, 1000); // Small delay to ensure print dialog has opened
-    });
-    document.body.appendChild(downloadButton);
+        });
+        
+        console.log('✅ Proof toggles setup complete');
+    }
     
-    // Add all styles in one style element
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0;
-            z-index: 9999;
-        }
+    // Smooth scrolling for anchor links
+    function initSmoothScrolling() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+    
+    // Basic animations for skill tags
+    function initSkillAnimations() {
+        const skillTags = document.querySelectorAll('.skill-tag');
+        skillTags.forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    }
+    
+    // Download functionality (if any download buttons exist)
+    function initDownloads() {
+        const downloadButtons = document.querySelectorAll('[data-download], .download-btn');
+        downloadButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const downloadUrl = this.getAttribute('data-download') || this.href;
+                if (downloadUrl) {
+                    window.open(downloadUrl, '_blank');
+                } else {
+                    alert('Download functionality requires the full modular system.');
+                }
+            });
+        });
+    }
+    
+    // External link handling and back button
+    function initExternalLinks() {
+        const externalLinks = document.querySelectorAll('a[target="_blank"]');
+        externalLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add security attributes if missing
+                if (!this.getAttribute('rel')) {
+                    this.setAttribute('rel', 'noopener noreferrer');
+                }
+            });
+        });
         
-        .print-button, .download-button {
-            position: fixed;
-            z-index: 1000;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-size: 14px;
+        // Handle back button specifically
+        const backButton = document.querySelector('.back-button');
+        if (backButton) {
+            console.log('Back button found:', backButton);
+            // Make sure the link works
+            backButton.style.color = '#e20074';
+            backButton.style.textDecoration = 'none';
+            backButton.style.cursor = 'pointer';
+            
+            // Add click handler as backup
+            backButton.addEventListener('click', function(e) {
+                console.log('Back button clicked - navigating to index.html');
+                // Try both approaches
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 100);
+            });
         }
-        
-        .print-button {
+    }
+    
+    // Basic tour guide functionality
+    function initTourGuide() {
+        // Create help button
+        const helpButton = document.createElement('button');
+        helpButton.innerHTML = '<i class="fas fa-question"></i>';
+        helpButton.style.cssText = `
+            position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e20074 0%, #990050 100%);
             color: white;
-        }
+            border: none;
+            box-shadow: 0 4px 15px rgba(226, 0, 116, 0.3);
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        `;
         
-        .download-button {
-            bottom: 20px;
-            right: 130px;
-            background: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
+        helpButton.addEventListener('click', function() {
+            alert('Welcome to Michal\'s Interactive CV!\n\n✨ Interactive Features:\n\n1️⃣ Achievement Details:\nClick "View Achievements" buttons to expand detailed accomplishments\n\n2️⃣ Photo Galleries:\nHover over 📸 camera icons to see event photos\n\n3️⃣ Interactive Skills:\nHover over skill tags for animations\n\n4️⃣ Download/Print:\nUse the Download button to save or print the CV\n\nExplore these numbered features throughout the page!');
+        });
         
-        .print-button:hover, .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(226, 0, 116, 0.2);
-        }
+        helpButton.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+        });
         
-        @media print {
-            .print-button, .download-button, .scroll-indicator {
-                display: none !important;
-            }
+        helpButton.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+        
+        document.body.appendChild(helpButton);
+    }
+
+    // Initialize all fallback functionality
+    function initializeFallbacks() {
+        try {
+            initAchievements();
+            initGallery();
+            initProfile();
+            initProofToggles();
+            initSmoothScrolling();
+            initSkillAnimations();
+            initDownloads();
+            initExternalLinks();
+            initTourGuide();
+            console.log('✅ Fallback functionality initialized successfully');
+        } catch (error) {
+            console.error('❌ Error initializing fallback functionality:', error);
         }
-    `;
-    document.head.appendChild(styleElement);
+    }
     
-    // Enhanced Achievements toggle functionality with hover and click behavior, optimized for both desktop and mobile
-    const achievementToggles = document.querySelectorAll('.achievements-toggle');
+    // Wait for DOM to be ready then initialize
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeFallbacks);
+    } else {
+        initializeFallbacks();
+    }
     
-    // Detect if device is mobile/touch
-    const isTouchDevice = () => {
-        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
-    };
+    // Basic error handling
+    window.addEventListener('error', function(e) {
+        console.error('Page error:', e.error);
+    });
     
-    const isTouch = isTouchDevice();
-    
-    achievementToggles.forEach(toggle => {
-        const achievementsSection = toggle.nextElementSibling;
-        let isPinned = false;
-        
-        // Animation function for achievement items
-        const animateAchievements = () => {
-            const achievementItems = achievementsSection.querySelectorAll('.achievements-list li');
-            achievementItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateX(-10px)';
-                item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateX(0)';
-                }, 50 + (index * 80));
-            });
-        };
-        
-        if (!isTouch) {
-            // Desktop behavior - hover and click
-            
-            // Show on hover
-            toggle.addEventListener('mouseenter', function() {
-                if (!isPinned) {
-                    achievementsSection.classList.add('active');
-                    this.innerHTML = '<i class="fas fa-thumbtack"></i> Pin View';
-                    animateAchievements();
-                }
-            });
-            
-            // Hide on mouse leave if not pinned
-            toggle.addEventListener('mouseleave', function() {
-                if (!isPinned) {
-                    achievementsSection.classList.remove('active');
-                    this.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
-                }
-            });
-        }
-        
-        // Pin/unpin on click (works for both desktop and mobile)
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            isPinned = !isPinned;
-            
-            if (isPinned) {
-                // Pin it open
-                this.classList.add('active');
-                achievementsSection.classList.add('active');
-                this.innerHTML = '<i class="fas fa-thumbtack"></i> Unpin';
-                animateAchievements();
+    // Show message for very old browsers
+    const isVeryOldBrowser = !window.fetch || !window.Promise;
+    if (isVeryOldBrowser) {
+        console.warn('This browser is very old. Some features may not work correctly.');
+    }
+}
+
+// Initialize the application
+(async function() {
+    try {
+        if (supportsModules()) {
+            const success = await loadModularSystem();
+            if (!success) {
+                console.log('🔄 Modular system failed, using fallback');
+                basicFallback();
             } else {
-                // Unpin it
-                this.classList.remove('active');
-                achievementsSection.classList.remove('active');
-                this.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
+                console.log('✅ Modular system loaded successfully - CSS should be working');
+                // Modules loaded successfully, trust that CSS will load too
+                // No need for fallback when modular system is working
             }
-        });
-    });
-    
-    // Initialize all achievement toggles with the trophy icon
-    achievementToggles.forEach(toggle => {
-        toggle.innerHTML = '<i class="fas fa-trophy"></i> Achievements';
-    });
-    
-    // Image Gallery functionality
-    function createGalleryIcon(galleryId) {
-        if (!galleryConfig[galleryId]) return null;
-        
-        const galleryIcon = document.createElement('span');
-        galleryIcon.className = 'gallery-icon';
-        galleryIcon.innerHTML = '<i class="fas fa-images"></i><span class="gallery-icon-pulse"></span>';
-        
-        const galleryContainer = document.createElement('div');
-        galleryContainer.className = 'gallery-container';
-        
-        // Remove title element since we don't need text
-        
-        const galleryImages = document.createElement('div');
-        galleryImages.className = 'gallery-images';
-        galleryImages.innerHTML = '';
-        
-        // Use actual images from the directories
-        let eventImages = [];
-        
-        // Set up the actual images based on gallery ID
-        if (galleryId === 'Techcelerate2024') {
-            eventImages = [
-                { src: galleryConfig[galleryId].path + 'IMG_0552.jpeg', alt: 'Techcelerate Conference photo 1' },
-                { src: galleryConfig[galleryId].path + 'IMG_1123.jpeg', alt: 'Techcelerate Conference photo 2' }
-            ];
-        } else if (galleryId === 'AllLeadsEssen2024') {
-            eventImages = [
-                { src: galleryConfig[galleryId].path + 'IMG_8182.jpeg', alt: 'DTIT Management Conference photo 1' },
-                { src: galleryConfig[galleryId].path + 'IMG_8184.jpeg', alt: 'DTIT Management Conference photo 2' }
-            ];
-        } else if (galleryId === 'WeAreDevelopers') {
-            eventImages = [
-                { src: galleryConfig[galleryId].path + 'IMG_4641.jpeg', alt: 'WeAreDevelopers Conference photo 1' },
-                { src: galleryConfig[galleryId].path + 'IMG_9965.jpeg', alt: 'WeAreDevelopers Conference photo 2' },
-                { src: galleryConfig[galleryId].path + 'IMG_9970.jpeg', alt: 'WeAreDevelopers Conference photo 3' }
-            ];
-        } else if (galleryId === 'Hackathons') {
-            eventImages = [
-                { src: galleryConfig[galleryId].path + 'IMG_0135.jpeg', alt: 'Hackathon photo 1' },
-                { src: galleryConfig[galleryId].path + 'IMG_0137.jpeg', alt: 'Hackathon photo 2' },
-                { src: galleryConfig[galleryId].path + 'IMG_0140.jpeg', alt: 'Hackathon photo 3' }
-            ];
+        } else {
+            console.log('🔄 ES6 modules not supported, using basic fallback');
+            basicFallback();
         }
-        
-        // Create image elements
-        galleryImages.innerHTML = '';
-        eventImages.forEach((img, index) => {
-            const imgElement = document.createElement('img');
-            imgElement.src = img.src;
-            imgElement.alt = img.alt;
-            imgElement.className = 'gallery-image';
-            imgElement.dataset.index = index;
-            imgElement.dataset.galleryId = galleryId;
-            
-            // Error handling for images that don't exist yet
-            imgElement.onerror = function() {
-                // Use a data URL for the placeholder instead of an external service
-                this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22150%22 height%3D%2280%22%3E%3Crect width%3D%22150%22 height%3D%2280%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%2275%22 y%3D%2240%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
-            };
-            
-            imgElement.addEventListener('click', function() {
-                openGalleryModal(galleryId, parseInt(this.dataset.index));
-            });
-            
-            galleryImages.appendChild(imgElement);
-        });
-        
-        // Only append the images container since we removed the title
-        galleryContainer.appendChild(galleryImages);
-        galleryIcon.appendChild(galleryContainer);
-        
-        return galleryIcon;
+    } catch (error) {
+        console.error('❌ Application initialization failed:', error);
+        basicFallback();
     }
-    
-    // Create gallery modal for fullscreen viewing
-    function createGalleryModal() {
-        const modal = document.createElement('div');
-        modal.className = 'gallery-modal';
-        modal.id = 'gallery-modal';
-        
-        const modalContent = document.createElement('div');
-        modalContent.className = 'gallery-modal-content';
-        
-        const modalImage = document.createElement('img');
-        modalImage.className = 'gallery-modal-image';
-        modalImage.id = 'gallery-modal-image';
-        
-        const closeButton = document.createElement('button');
-        closeButton.className = 'gallery-modal-close';
-        closeButton.innerHTML = '<i class="fas fa-times"></i>';
-        closeButton.addEventListener('click', closeGalleryModal);
-        
-        const prevButton = document.createElement('div');
-        prevButton.className = 'gallery-modal-nav gallery-modal-prev';
-        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        prevButton.addEventListener('click', showPrevImage);
-        
-        const nextButton = document.createElement('div');
-        nextButton.className = 'gallery-modal-nav gallery-modal-next';
-        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        nextButton.addEventListener('click', showNextImage);
-        
-        modalContent.appendChild(modalImage);
-        modalContent.appendChild(closeButton);
-        modalContent.appendChild(prevButton);
-        modalContent.appendChild(nextButton);
-        modal.appendChild(modalContent);
-        
-        document.body.appendChild(modal);
-    }
-    
-    // Current gallery state
-    let currentGallery = '';
-    let currentIndex = 0;
-    
-    // Open gallery modal
-    function openGalleryModal(galleryId, index) {
-        const modal = document.getElementById('gallery-modal');
-        const modalImage = document.getElementById('gallery-modal-image');
-        
-        currentGallery = galleryId;
-        currentIndex = index;
-        
-        // Get the image path based on the gallery ID and index
-        let imagePath = '';
-        if (galleryId === 'Techcelerate2024') {
-            imagePath = index === 0 ? galleryConfig[galleryId].path + 'IMG_0552.jpeg' : galleryConfig[galleryId].path + 'IMG_1123.jpeg';
-        } else if (galleryId === 'AllLeadsEssen2024') {
-            imagePath = index === 0 ? galleryConfig[galleryId].path + 'IMG_8182.jpeg' : galleryConfig[galleryId].path + 'IMG_8184.jpeg';
-        } else if (galleryId === 'WeAreDevelopers') {
-            if (index === 0) imagePath = galleryConfig[galleryId].path + 'IMG_4641.jpeg';
-            else if (index === 1) imagePath = galleryConfig[galleryId].path + 'IMG_9965.jpeg';
-            else imagePath = galleryConfig[galleryId].path + 'IMG_9970.jpeg';
-        } else if (galleryId === 'Hackathons') {
-            if (index === 0) imagePath = galleryConfig[galleryId].path + 'IMG_0135.jpeg';
-            else if (index === 1) imagePath = galleryConfig[galleryId].path + 'IMG_0137.jpeg';
-            else imagePath = galleryConfig[galleryId].path + 'IMG_0140.jpeg';
-        }
-        
-        modalImage.src = imagePath;
-        modalImage.alt = 'Gallery image ' + (index + 1);
-        
-        // Error handling
-        modalImage.onerror = function() {
-            // Use a data URL for the placeholder instead of an external service
-            this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22800%22 height%3D%22600%22%3E%3Crect width%3D%22800%22 height%3D%22600%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%22400%22 y%3D%22300%22 font-family%3D%22Arial%22 font-size%3D%2224%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
-        };
-        
-        // Show the modal
-        modal.classList.add('active');
-        
-        // Prevent scrolling on the body
-        document.body.style.overflow = 'hidden';
-    }
-    
-    // Close gallery modal
-    function closeGalleryModal() {
-        const modal = document.getElementById('gallery-modal');
-        modal.classList.remove('active');
-        
-        // Re-enable scrolling
-        document.body.style.overflow = '';
-    }
-    
-    // Show previous image
-    function showPrevImage() {
-        if (!currentGallery) return;
-        
-        // Get the number of images for the current gallery
-        let imageCount = getImageCount(currentGallery);
-        currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-        openGalleryModal(currentGallery, currentIndex);
-    }
-    
-    // Show next image
-    function showNextImage() {
-        if (!currentGallery) return;
-        
-        // Get the number of images for the current gallery
-        let imageCount = getImageCount(currentGallery);
-        currentIndex = (currentIndex + 1) % imageCount;
-        openGalleryModal(currentGallery, currentIndex);
-    }
-    
-    // Helper function to get image count for a gallery
-    function getImageCount(galleryId) {
-        if (galleryId === 'Techcelerate2024') return 2;
-        if (galleryId === 'AllLeadsEssen2024') return 2;
-        if (galleryId === 'WeAreDevelopers') return 3;
-        if (galleryId === 'Hackathons') return 3;
-        return 1; // Default fallback
-    }
-    
-    // Add keyboard navigation for gallery
-    document.addEventListener('keydown', function(e) {
-        if (!document.getElementById('gallery-modal').classList.contains('active')) return;
-        
-        if (e.key === 'Escape') {
-            closeGalleryModal();
-        } else if (e.key === 'ArrowLeft') {
-            showPrevImage();
-        } else if (e.key === 'ArrowRight') {
-            showNextImage();
-        }
-    });
-
-    // Create the gallery modal
-    createGalleryModal();
-
-    // Initialize gallery icons that are already in the HTML
-    const galleryIcons = {
-        'gallery-Techcelerate2024': 'Techcelerate2024',
-        'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
-        'gallery-WeAreDevelopers': 'WeAreDevelopers',
-        'gallery-Hackathons': 'Hackathons'
-    };
-
-    // Process each gallery icon
-    Object.keys(galleryIcons).forEach(iconId => {
-        const iconElement = document.getElementById(iconId);
-        if (iconElement) {
-            const galleryId = galleryIcons[iconId];
-            
-            // Create gallery container
-            const galleryContainer = document.createElement('div');
-            galleryContainer.className = 'gallery-container';
-            
-            // Add gallery title
-            const galleryTitle = document.createElement('div');
-            galleryTitle.className = 'gallery-title';
-            galleryTitle.textContent = galleryConfig[galleryId].title;
-            galleryContainer.appendChild(galleryTitle);
-            
-            // Create images container
-            const galleryImages = document.createElement('div');
-            galleryImages.className = 'gallery-images';
-            
-            // Add images based on gallery ID
-            let imagesToAdd = [];
-            if (galleryId === 'Techcelerate2024') {
-                imagesToAdd = ['IMG_0552.jpeg', 'IMG_1123.jpeg'];
-            } else if (galleryId === 'AllLeadsEssen2024') {
-                imagesToAdd = ['IMG_8182.jpeg', 'IMG_8184.jpeg'];
-            } else if (galleryId === 'WeAreDevelopers') {
-                imagesToAdd = ['IMG_4641.jpeg', 'IMG_9965.jpeg', 'IMG_9970.jpeg'];
-            } else if (galleryId === 'Hackathons') {
-                imagesToAdd = ['IMG_0135.jpeg', 'IMG_0137.jpeg', 'IMG_0140.jpeg'];
-            }
-            
-            // Create thumbnail images
-            imagesToAdd.forEach((imageName, index) => {
-                const img = document.createElement('img');
-                img.className = 'gallery-image';
-                img.src = galleryConfig[galleryId].path + imageName;
-                img.alt = galleryConfig[galleryId].title + ' image ' + (index + 1);
-                img.addEventListener('click', () => openGalleryModal(galleryId, index));
-                img.addEventListener('error', function() {
-                    this.src = 'data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22150%22 height%3D%2280%22%3E%3Crect width%3D%22150%22 height%3D%2280%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%2275%22 y%3D%2240%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E';
-                    this.alt = 'Image not available';
-                });
-                galleryImages.appendChild(img);
-            });
-            
-            galleryContainer.appendChild(galleryImages);
-            iconElement.appendChild(galleryContainer);
-            
-            // Add click event to open the first image in modal
-            iconElement.addEventListener('click', () => openGalleryModal(galleryId, 0));
-        }
-    });
-});
+})();

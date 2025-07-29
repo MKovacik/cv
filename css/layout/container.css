@@ -1,0 +1,54 @@
+/**
+ * Container and Layout Styles
+ * Base layout containers and grid systems
+ */
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    
+    /* Force light theme */
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+/* Main Content */
+main {
+    background-color: var(--white);
+    padding: 0;
+    margin-bottom: 60px;
+    
+    /* Force light theme */
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+/* Section Styles */
+.section {
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    
+    /* Force light theme */
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+.section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Responsive Container */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+}

@@ -1,0 +1,85 @@
+/**
+ * Button Component Styles
+ * All button variants and states
+ */
+
+/* Download and Print Buttons */
+.print-button,
+.download-button {
+    position: fixed;
+    z-index: var(--z-fixed);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    box-shadow: var(--light-shadow);
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-primary);
+}
+
+.print-button {
+    bottom: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.download-button {
+    bottom: var(--spacing-lg);
+    right: 130px;
+    background: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.print-button:hover,
+.download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.print-button:focus,
+.download-button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--spacing-xs);
+    width: 0;
+    z-index: var(--z-tooltip);
+    background: var(--primary-color);
+    transition: width 0.1s ease;
+}
+
+/* Print Media Queries */
+@media print {
+    .print-button,
+    .download-button,
+    .scroll-indicator {
+        display: none !important;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .print-button,
+    .download-button {
+        transition: none;
+    }
+    
+    .print-button:hover,
+    .download-button:hover {
+        transform: none;
+    }
+}

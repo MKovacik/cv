@@ -1,0 +1,146 @@
+/**
+ * CSS Custom Properties (Variables)
+ * Centralized design tokens for consistent theming
+ */
+
+:root {
+    /* Brand Colors */
+    --primary-color: #e20074; /* Telekom Magenta */
+    --primary-color-rgb: 226, 0, 116; /* RGB values for Telekom Magenta */
+    --secondary-color: #990050; /* Darker Magenta */
+    --accent-color: #ff5722; /* Orange accent for hover effects */
+    --accent-color-rgb: 255, 87, 34; /* RGB values for accent color */
+    
+    /* Text Colors */
+    --text-color: #333333;
+    --light-text: #666666;
+    --white: #ffffff;
+    
+    /* Background Colors */
+    --bg-color: #ffffff;
+    --light-bg: #f9f9f9;
+    --border-color: #eeeeee;
+    --accent-bg: #f5f5f5; /* Light Gray */
+    
+    /* Gradients */
+    --gradient-start: #e20074;
+    --gradient-end: #990050;
+    --primary-gradient: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    --section-bg: linear-gradient(135deg, rgba(226, 0, 116, 0.05) 0%, rgba(153, 0, 80, 0.05) 100%);
+    
+    /* Shadows */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --card-shadow-hover: 0 15px 30px rgba(226, 0, 116, 0.15);
+    --primary-shadow: 0 4px 15px rgba(226, 0, 116, 0.3);
+    --light-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 16px;
+    --border-radius-round: 50%;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    
+    /* Typography */
+    --font-family-primary: 'Roboto', sans-serif;
+    --font-family-secondary: 'Poppins', 'Roboto', sans-serif;
+    
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    
+    /* Z-Index Scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-toast: 1080;
+    
+    /* Breakpoints (for reference in JS) */
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    
+    /* Animation Durations */
+    --animation-duration-fast: 150ms;
+    --animation-duration-normal: 300ms;
+    --animation-duration-slow: 500ms;
+    
+    /* Gallery specific */
+    --gallery-modal-bg: rgba(0, 0, 0, 0.9);
+    --gallery-container-bg: rgba(255, 255, 255, 0.95);
+    
+    /* Tour guide specific */
+    --tour-indicator-size: 20px;
+    --tour-tooltip-width: 300px;
+}
+
+/* Dark mode variables (disabled for now to force light theme) */
+/* 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #ffffff;
+        --light-text: #cccccc;
+        --bg-color: #1a1a1a;
+        --light-bg: #2a2a2a;
+        --border-color: #333333;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+}
+*/
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --transition-fast: 0s;
+        --transition-normal: 0s;
+        --transition-slow: 0s;
+        --transition-bounce: 0s;
+        --animation-duration-fast: 0s;
+        --animation-duration-normal: 0s;
+        --animation-duration-slow: 0s;
+    }
+}
+
+/* High contrast preferences */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --light-text: #000000;
+        --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+}
