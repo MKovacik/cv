@@ -17,22 +17,22 @@
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-sm);
-    color: var(--primary-color);
+    color: #e20074 !important;
     text-decoration: none;
-    font-weight: var(--font-weight-medium);
+    font-weight: 600 !important;
     transition: all var(--transition-normal);
     padding: var(--spacing-sm) var(--spacing-md);
     border-radius: var(--border-radius-sm);
-    font-size: var(--font-size-base);
-    
-    /* Force light theme */
-    color: #e20074 !important;
+    font-size: var(--font-size-lg) !important;
+    background-color: rgba(226, 0, 116, 0.1) !important;
+    border: 2px solid #e20074 !important;
 }
 
 .back-button:hover {
-    background-color: rgba(226, 0, 116, 0.1);
-    transform: translateX(-2px);
-    color: #990050 !important;
+    background-color: #e20074 !important;
+    color: #ffffff !important;
+    transform: translateX(-4px);
+    box-shadow: 0 4px 12px rgba(226, 0, 116, 0.3) !important;
 }
 
 /* Hero Section */
@@ -297,11 +297,7 @@ blockquote {
     margin-bottom: var(--spacing-md);
 }
 
-.proof-checkbox {
-    display: none;
-}
-
-.proof-label {
+.proof-button {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
@@ -309,12 +305,15 @@ blockquote {
     font-weight: var(--font-weight-medium);
     color: var(--primary-color);
     transition: all var(--transition-normal);
+    background: none;
+    border: none;
+    padding: 0;
     
     /* Force light theme */
     color: #e20074 !important;
 }
 
-.proof-label:hover {
+.proof-button:hover {
     color: var(--secondary-color);
     
     /* Force light theme */
@@ -327,33 +326,32 @@ blockquote {
     color: var(--white);
     border-radius: var(--border-radius-sm);
     font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
     
     /* Force light theme */
     background-color: #e20074 !important;
     color: #ffffff !important;
 }
 
-.proof-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    padding: 0;
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius-md);
-    margin-top: var(--spacing-sm);
-    opacity: 0;
-    
-    /* Force light theme */
-    background-color: #f9f9f9 !important;
-    color: #333333 !important;
+.proof-status:hover {
+    background-color: #990050 !important;
 }
 
-/* When checkbox is checked, show the proof content */
-.quality-proof .proof-checkbox:checked ~ .proof-content,
+.proof-content {
+    display: none;
+    padding: 16px;
+    background-color: #f9f9f9 !important;
+    color: #333333 !important;
+    border-radius: 8px;
+    margin-top: 12px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+/* When expanded, show the proof content */
 .proof-content.expanded {
-    max-height: 300px;
-    padding: var(--spacing-md);
-    opacity: 1;
+    display: block !important;
 }
 
 .proof-content p {

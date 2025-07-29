@@ -564,6 +564,12 @@ function basicFallback() {
     
     // Basic tour guide functionality
     function initTourGuide() {
+        // Skip tour guide on profile page
+        if (window.isProfilePage) {
+            console.log('Skipping fallback tour guide - profile page has its own');
+            return;
+        }
+        
         // Create help button
         const helpButton = document.createElement('button');
         helpButton.innerHTML = '<i class="fas fa-question"></i>';

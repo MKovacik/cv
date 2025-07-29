@@ -16,7 +16,6 @@
         <header>
             <a href="index.html" class="back-button">
                 <i class="fas fa-arrow-left"></i> Back to CV
-                
             </a>
         </header>
 
@@ -67,13 +66,12 @@
                                 <p class="quality-text">I possess a compelling vision and consistently place the customer at the center of my decision-making.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="vision-proof" class="proof-checkbox">
-                                        <label for="vision-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>As AI Strategy, Vision, and Implementation Leader at Deutsche Telekom, I "drove the vision, strategy, and execution of AI to ensure meaningful adoption and alignment with business goals." This included presenting key AI achievements directly to the Deutsche Telekom AG CEO, highlighting how our customer-centric innovations delivered business impact.</p>
                                     </div>
                                 </div>
@@ -88,13 +86,12 @@
                                 <p class="quality-text">I am courageous and unafraid to take calculated risks to drive innovative change.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="courage-proof" class="proof-checkbox">
-                                        <label for="courage-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>I "spearheaded the enterprise-wide adoption of AI developer tools (e.g., GitHub Copilot), growing the active user base by 21% to over 3,000 developers" and "executed a company-wide AI awareness campaign, reaching over 4,000 employees." These initiatives required courage to champion new technologies and drive organizational change across Deutsche Telekom.</p>
                                     </div>
                                 </div>
@@ -109,13 +106,12 @@
                                 <p class="quality-text">I excel at bringing out the best in people through empathy and thoughtful guidance.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="empathy-proof" class="proof-checkbox">
-                                        <label for="empathy-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>As Chapter Proxy for Software Engineering, QA, and Data, I "provided disciplinary leadership for 15+ People Leads overseeing 350 software engineers, QAs, and data scientists." I also "designed and implemented a transparent career progression framework for Software Engineers, boosting team satisfaction and reducing annual attrition to an industry-leading 6%."</p>
                                     </div>
                                 </div>
@@ -130,13 +126,12 @@
                                 <p class="quality-text">I collaborate effectively across departments, fostering synergy and building diverse teams.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="collaboration-proof" class="proof-checkbox">
-                                        <label for="collaboration-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>I "spearheaded the alignment of local chapter practices with global DTIT standards, collaborating with international counterparts" and "drove group-wide AI strategic alignment by collaborating with leaders from all major DT business units to maximize investment ROI and ensure a unified market approach." This demonstrates my ability to work effectively across organizational boundaries.</p>
                                     </div>
                                 </div>
@@ -151,13 +146,12 @@
                                 <p class="quality-text">I act as a magnet for talent by cultivating a strong culture of trust.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="talent-proof" class="proof-checkbox">
-                                        <label for="talent-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>I "led a strategic rebranding of the local chapter to align with global standards, directly resulting in a 30% growth of the software engineering organization in Slovakia" and "orchestrated a 100% growth of the development department within one year, scaling from ~25 to over 50 engineers and establishing 3 new, fully-functional teams." These achievements demonstrate my ability to attract and retain top talent.</p>
                                     </div>
                                 </div>
@@ -172,13 +166,12 @@
                                 <p class="quality-text">I continuously learn and stay updated on the opportunities presented by our digital future.</p>
                                 <div class="quality-proof">
                                     <div class="proof-toggle">
-                                        <input type="checkbox" id="learning-proof" class="proof-checkbox">
-                                        <label for="learning-proof" class="proof-label">
+                                        <button type="button" class="proof-button" onclick="toggleProof(this)">
                                             <span class="proof-status">Proven</span>
                                             <i class="fas fa-chevron-down"></i>
-                                        </label>
+                                        </button>
                                     </div>
-                                    <div class="proof-content">
+                                    <div class="proof-content" style="display: none;">
                                         <p>I "acted as the key technical evangelist for AI, translating complex topics into actionable insights" and led the development of the Advanced Coding Assistant (ACA), "contributing to its successful delivery as an open-source project on the official Telekom GitHub." I also "established a framework for tracking and reporting the ROI of AI initiatives," demonstrating my commitment to continuous learning and innovation.</p>
                                     </div>
                                 </div>
@@ -241,6 +234,167 @@
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <style>
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 2px 8px rgba(226, 0, 116, 0.3);
+            }
+            50% {
+                box-shadow: 0 2px 8px rgba(226, 0, 116, 0.6), 0 0 0 8px rgba(226, 0, 116, 0.1);
+            }
+            100% {
+                box-shadow: 0 2px 8px rgba(226, 0, 116, 0.3);
+            }
+        }
+        
+        .feature-indicator {
+            animation: pulse 2s infinite;
+        }
+    </style>
+    <script>
+        // Simple proof toggle function
+        function toggleProof(button) {
+            console.log('Toggle proof called for button:', button);
+            
+            try {
+                // Find the proof content
+                const qualityProof = button.closest('.quality-proof');
+                if (!qualityProof) {
+                    console.error('Could not find .quality-proof parent');
+                    return;
+                }
+                
+                const proofContent = qualityProof.querySelector('.proof-content');
+                const chevronIcon = button.querySelector('.fa-chevron-down, .fa-chevron-up');
+                
+                console.log('Found proof content:', proofContent);
+                console.log('Found chevron icon:', chevronIcon);
+                
+                if (proofContent) {
+                    const currentDisplay = window.getComputedStyle(proofContent).display;
+                    const isVisible = currentDisplay === 'block';
+                    console.log('Current display style:', currentDisplay, 'isVisible:', isVisible);
+                    
+                    if (isVisible) {
+                        // Hide
+                        proofContent.classList.remove('expanded');
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-up');
+                            chevronIcon.classList.add('fa-chevron-down');
+                        }
+                        console.log('Hidden proof content');
+                    } else {
+                        // Show
+                        proofContent.classList.add('expanded');
+                        
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-down');
+                            chevronIcon.classList.add('fa-chevron-up');
+                        }
+                        console.log('Shown proof content');
+                    }
+                } else {
+                    console.error('Proof content not found in quality-proof container');
+                }
+            } catch (error) {
+                console.error('Error in toggleProof:', error);
+            }
+        }
+        
+        // Simple profile tour guide
+        function createProfileTourGuide() {
+            console.log('Creating profile tour guide...');
+            
+            // Remove existing help buttons
+            const existing = document.querySelectorAll('#profile-help-button, button[style*="position: fixed"]');
+            existing.forEach(btn => btn.remove());
+            
+            // Create simple help button
+            const helpBtn = document.createElement('button');
+            helpBtn.id = 'profile-help-button';
+            helpBtn.innerHTML = '?';
+            
+            // Apply styles directly
+            helpBtn.style.position = 'fixed';
+            helpBtn.style.bottom = '20px';
+            helpBtn.style.right = '20px';
+            helpBtn.style.width = '50px';
+            helpBtn.style.height = '50px';
+            helpBtn.style.borderRadius = '50%';
+            helpBtn.style.background = '#e20074';
+            helpBtn.style.color = 'white';
+            helpBtn.style.border = 'none';
+            helpBtn.style.fontSize = '20px';
+            helpBtn.style.fontWeight = 'bold';
+            helpBtn.style.cursor = 'pointer';
+            helpBtn.style.zIndex = '9999';
+            helpBtn.style.boxShadow = '0 4px 15px rgba(226, 0, 116, 0.3)';
+            
+            helpBtn.onclick = function() {
+                alert('Profile Page Guide:\\n\\n1️⃣ Proven Leadership: Click "Proven" buttons to see achievements\\n\\n2️⃣ Back Navigation: Use back arrow to return to CV\\n\\n3️⃣ Interactive Skills: Hover over skill tags for effects');
+            };
+            
+            document.body.appendChild(helpBtn);
+            console.log('Help button added to page');
+            
+            // Add simple indicators
+            addSimpleIndicators();
+        }
+        
+        function addSimpleIndicators() {
+            // Add indicator to first proven button
+            const provenBtn = document.querySelector('.proof-button');
+            if (provenBtn && !provenBtn.querySelector('.indicator')) {
+                const indicator = document.createElement('span');
+                indicator.className = 'indicator';
+                indicator.textContent = '1';
+                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
+                provenBtn.style.position = 'relative';
+                provenBtn.appendChild(indicator);
+            }
+            
+            // Add indicator to back button
+            const backBtn = document.querySelector('.back-button');
+            if (backBtn && !backBtn.querySelector('.indicator')) {
+                const indicator = document.createElement('span');
+                indicator.className = 'indicator';
+                indicator.textContent = '2';
+                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
+                backBtn.style.position = 'relative';
+                backBtn.appendChild(indicator);
+            }
+            
+            // Add indicator to skills
+            const skillsTitle = document.querySelector('.skills-bubbles-title');
+            if (skillsTitle && !skillsTitle.querySelector('.indicator')) {
+                const indicator = document.createElement('span');
+                indicator.className = 'indicator';
+                indicator.textContent = '3';
+                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
+                skillsTitle.style.position = 'relative';
+                skillsTitle.appendChild(indicator);
+            }
+            
+            console.log('Indicators added');
+        }
+        
+        
+        // Set current year
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize profile tour guide 
+            console.log('DOM ready, creating tour guide...');
+            createProfileTourGuide();
+        });
+    </script>
+    <script>
+        // Mark this as profile page to prevent conflicts with script.js tour guide
+        window.isProfilePage = true;
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
