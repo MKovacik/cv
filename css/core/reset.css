@@ -137,12 +137,15 @@ table {
 a {
     background-color: transparent;
     text-decoration: none;
-    color: inherit;
+    color: var(--primary-color); /* Magenta color for all links */
+    transition: color var(--transition-fast);
 }
 
 a:active,
 a:hover {
     outline: 0;
+    color: var(--secondary-color); /* Darker magenta on hover */
+    text-decoration: underline;
 }
 
 /* Images */
