@@ -250,6 +250,174 @@
         .feature-indicator {
             animation: pulse 2s infinite;
         }
+        
+        /* Tour Guide Styles for Profile Page */
+        .tour-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .help-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(226, 0, 116, 0.3);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .help-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .tooltip-container {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .tooltip-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 16px;
+        }
+        
+        .tooltip-title {
+            font-weight: 600;
+            color: #e20074;
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .tooltip-close {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 0;
+        }
+        
+        .tooltip-close:hover {
+            color: #e20074;
+        }
+        
+        .tooltip-content {
+            margin-bottom: 16px;
+        }
+        
+        .tooltip-content p {
+            margin: 0 0 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .tooltip-content ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .tooltip-content li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .tooltip-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        
+        .tooltip-button {
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .tooltip-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tooltip-button.secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .feature-indicator {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #e20074 !important;
+            color: white !important;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(226, 0, 116, 0.3);
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        .feature-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background-color: #e20074 !important;
+            color: white !important;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        .inline-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background-color: #e20074 !important;
+            color: white !important;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 0 3px;
+            vertical-align: middle;
+        }
     </style>
     <script>
         // Simple proof toggle function
@@ -301,82 +469,285 @@
             }
         }
         
-        // Simple profile tour guide
-        function createProfileTourGuide() {
-            console.log('Creating profile tour guide...');
-            
-            // Remove existing help buttons
-            const existing = document.querySelectorAll('#profile-help-button, button[style*="position: fixed"]');
-            existing.forEach(btn => btn.remove());
-            
-            // Create simple help button
-            const helpBtn = document.createElement('button');
-            helpBtn.id = 'profile-help-button';
-            helpBtn.innerHTML = '?';
-            
-            // Apply styles directly
-            helpBtn.style.position = 'fixed';
-            helpBtn.style.bottom = '20px';
-            helpBtn.style.right = '20px';
-            helpBtn.style.width = '50px';
-            helpBtn.style.height = '50px';
-            helpBtn.style.borderRadius = '50%';
-            helpBtn.style.background = '#e20074';
-            helpBtn.style.color = 'white';
-            helpBtn.style.border = 'none';
-            helpBtn.style.fontSize = '20px';
-            helpBtn.style.fontWeight = 'bold';
-            helpBtn.style.cursor = 'pointer';
-            helpBtn.style.zIndex = '9999';
-            helpBtn.style.boxShadow = '0 4px 15px rgba(226, 0, 116, 0.3)';
-            
-            helpBtn.onclick = function() {
-                alert('Profile Page Guide:\\n\\n1️⃣ Proven Leadership: Click "Proven" buttons to see achievements\\n\\n2️⃣ Back Navigation: Use back arrow to return to CV\\n\\n3️⃣ Interactive Skills: Hover over skill tags for effects');
-            };
-            
-            document.body.appendChild(helpBtn);
-            console.log('Help button added to page');
-            
-            // Add simple indicators
-            addSimpleIndicators();
-        }
-        
-        function addSimpleIndicators() {
-            // Add indicator to first proven button
-            const provenBtn = document.querySelector('.proof-button');
-            if (provenBtn && !provenBtn.querySelector('.indicator')) {
-                const indicator = document.createElement('span');
-                indicator.className = 'indicator';
-                indicator.textContent = '1';
-                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
-                provenBtn.style.position = 'relative';
-                provenBtn.appendChild(indicator);
+        // Profile Tour Guide Manager - Full featured like index.html
+        const ProfileTourGuide = {
+            config: {
+                features: [
+                    {
+                        id: 'proven-leadership',
+                        selector: '.proof-button',
+                        title: 'Proven Leadership Examples',
+                        description: 'Each leadership quality has a "Proven" button that reveals specific achievements and real examples from my career at Deutsche Telekom. Click these buttons to see detailed evidence of my leadership capabilities.',
+                        position: 'top-right'
+                    },
+                    {
+                        id: 'back-navigation',
+                        selector: '.back-button',
+                        title: 'Return to Main CV',
+                        description: 'The back arrow in the header takes you back to the complete CV with my full professional experience, technical skills, and career timeline.',
+                        position: 'bottom'
+                    },
+                    {
+                        id: 'interactive-skills',
+                        selector: '.skills-bubbles-title',
+                        title: 'Technical & Leadership Skills',
+                        description: 'The skills section showcases my technical stack and leadership competencies. Hover over individual skill tags to see interactive animations.',
+                        position: 'left'
+                    }
+                ]
+            },
+
+            state: {
+                isActive: false,
+                currentStep: 0,
+                helpButton: null,
+                tooltipContainer: null,
+                indicators: [],
+                hasBeenShown: false
+            },
+
+            init() {
+                this.createHelpButton();
+                this.checkFirstVisit();
+            },
+
+            createHelpButton() {
+                // Remove any existing help buttons first
+                const existing = document.querySelectorAll('.tour-container, #profile-help-button');
+                existing.forEach(btn => btn.remove());
+
+                // Create tour container
+                const tourContainer = document.createElement('div');
+                tourContainer.className = 'tour-container';
+
+                // Create help button
+                this.state.helpButton = document.createElement('button');
+                this.state.helpButton.className = 'help-button';
+                this.state.helpButton.title = 'Get help and tour the profile page';
+                this.state.helpButton.innerHTML = '<i class="fas fa-question"></i>';
+
+                this.state.helpButton.addEventListener('click', () => {
+                    this.toggleTour();
+                });
+
+                // Create tooltip container
+                this.state.tooltipContainer = document.createElement('div');
+                this.state.tooltipContainer.className = 'tooltip-container';
+                this.state.tooltipContainer.style.display = 'none';
+
+                tourContainer.appendChild(this.state.helpButton);
+                tourContainer.appendChild(this.state.tooltipContainer);
+                document.body.appendChild(tourContainer);
+            },
+
+            checkFirstVisit() {
+                try {
+                    const hasVisited = localStorage.getItem('cv-profile-tour-shown');
+                    if (!hasVisited && !this.state.hasBeenShown) {
+                        setTimeout(() => {
+                            this.startTour();
+                        }, 2000);
+                    }
+                } catch (error) {
+                    console.log('localStorage not available for profile tour guide');
+                }
+            },
+
+            toggleTour() {
+                if (this.state.isActive) {
+                    this.endTour();
+                } else {
+                    this.startTour();
+                }
+            },
+
+            startTour() {
+                this.state.isActive = true;
+                this.state.currentStep = 0;
+                this.state.hasBeenShown = true;
+
+                this.showWelcomeTooltip();
+                this.createFeatureIndicators();
+
+                try {
+                    localStorage.setItem('cv-profile-tour-shown', 'true');
+                } catch (error) {
+                    console.log('Could not save profile tour state');
+                }
+            },
+
+            showWelcomeTooltip() {
+                const tooltipContent = `
+                    <div class="tooltip-header">
+                        <h3 class="tooltip-title">Welcome to Michal's Leadership Profile!</h3>
+                        <button class="tooltip-close" aria-label="Close tour">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="tooltip-content">
+                        <p>This leadership profile demonstrates my qualifications with real achievements:</p>
+                        <ul>
+                            <li><strong><span class="feature-number">1</span> Proven Leadership:</strong> Click "Proven" buttons under each leadership quality to reveal detailed career achievements and concrete examples</li>
+                            <li><strong><span class="feature-number">2</span> Back Navigation:</strong> Use the back arrow in the header to return to the complete CV with full professional experience</li>
+                            <li><strong><span class="feature-number">3</span> Interactive Skills:</strong> Hover over skill tags in the skills section to see animations and explore my technical expertise</li>
+                        </ul>
+                        <p>Click on the numbered indicators (<span class="inline-indicator">1</span> <span class="inline-indicator">2</span> <span class="inline-indicator">3</span>) positioned next to each feature to learn more!</p>
+                    </div>
+                    <div class="tooltip-actions">
+                        <button class="tooltip-button secondary">Skip Tour</button>
+                        <button class="tooltip-button">Got it!</button>
+                    </div>
+                `;
+
+                this.state.tooltipContainer.innerHTML = tooltipContent;
+                this.state.tooltipContainer.style.display = 'block';
+
+                const closeButton = this.state.tooltipContainer.querySelector('.tooltip-close');
+                const skipButton = this.state.tooltipContainer.querySelector('.tooltip-button.secondary');
+                const gotItButton = this.state.tooltipContainer.querySelector('.tooltip-button:not(.secondary)');
+
+                closeButton.addEventListener('click', () => this.endTour());
+                skipButton.addEventListener('click', () => this.endTour());
+                gotItButton.addEventListener('click', () => this.hideTooltip());
+            },
+
+            createFeatureIndicators() {
+                console.log('Creating feature indicators...');
+                this.config.features.forEach((feature, index) => {
+                    console.log(`Looking for feature ${index + 1}: ${feature.selector}`);
+                    const targetElements = document.querySelectorAll(feature.selector);
+                    console.log(`Found ${targetElements.length} elements for ${feature.selector}`);
+                    
+                    if (!targetElements || targetElements.length === 0) {
+                        console.warn(`No elements found for selector: ${feature.selector}`);
+                        return;
+                    }
+
+                    const targetElement = targetElements[0];
+                    const indicator = this.createIndicator(index + 1, feature);
+                    
+                    this.positionIndicator(indicator, targetElement, feature.position);
+                    this.state.indicators.push(indicator);
+                    
+                    document.body.appendChild(indicator);
+                    console.log(`Added indicator ${index + 1} to page`);
+                });
+                console.log(`Total indicators created: ${this.state.indicators.length}`);
+            },
+
+            createIndicator(number, feature) {
+                const indicator = document.createElement('div');
+                indicator.className = 'feature-indicator';
+                indicator.style.cursor = 'pointer';
+                indicator.textContent = number.toString();
+
+                indicator.addEventListener('click', () => {
+                    this.showFeatureTooltip(feature, indicator);
+                });
+
+                return indicator;
+            },
+
+            positionIndicator(indicator, target, position) {
+                const rect = target.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+                let left, top;
+
+                switch (position) {
+                    case 'top-left':
+                        left = rect.left + scrollLeft - 30;
+                        top = rect.top + scrollTop - 10;
+                        break;
+                    case 'top-right':
+                        left = rect.right + scrollLeft + 10;
+                        top = rect.top + scrollTop - 10;
+                        break;
+                    case 'bottom':
+                        left = rect.left + scrollLeft + (rect.width / 2) - 10;
+                        top = rect.bottom + scrollTop + 10;
+                        break;
+                    case 'left':
+                        left = rect.left + scrollLeft - 30;
+                        top = rect.top + scrollTop + (rect.height / 2) - 10;
+                        break;
+                    default:
+                        left = rect.right + scrollLeft + 10;
+                        top = rect.top + scrollTop + (rect.height / 2) - 10;
+                }
+
+                indicator.style.position = 'absolute';
+                indicator.style.left = `${Math.max(10, left)}px`;
+                indicator.style.top = `${Math.max(10, top)}px`;
+            },
+
+            showFeatureTooltip(feature, indicator) {
+                const tooltipContent = `
+                    <div class="tooltip-header">
+                        <h3 class="tooltip-title">${feature.title}</h3>
+                        <button class="tooltip-close" aria-label="Close tooltip">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="tooltip-content">
+                        <p>${feature.description}</p>
+                    </div>
+                    <div class="tooltip-actions">
+                        <button class="tooltip-button">Close</button>
+                    </div>
+                `;
+
+                this.state.tooltipContainer.innerHTML = tooltipContent;
+                this.state.tooltipContainer.style.display = 'block';
+
+                const closeButton = this.state.tooltipContainer.querySelector('.tooltip-close');
+                const closeActionButton = this.state.tooltipContainer.querySelector('.tooltip-button');
+
+                closeButton.addEventListener('click', () => this.hideTooltip());
+                closeActionButton.addEventListener('click', () => this.hideTooltip());
+
+                this.highlightFeature(feature.selector);
+            },
+
+            highlightFeature(selector) {
+                const elements = document.querySelectorAll(selector);
+                if (!elements) return;
+
+                elements.forEach(element => {
+                    element.style.transition = 'all 0.3s ease';
+                    element.style.transform = 'scale(1.05)';
+                    element.style.boxShadow = '0 0 0 3px rgba(226, 0, 116, 0.3)';
+                    element.style.borderRadius = '4px';
+
+                    setTimeout(() => {
+                        element.style.transform = '';
+                        element.style.boxShadow = '';
+                        element.style.borderRadius = '';
+                    }, 2000);
+                });
+            },
+
+            hideTooltip() {
+                this.state.tooltipContainer.style.display = 'none';
+                this.state.tooltipContainer.innerHTML = '';
+            },
+
+            endTour() {
+                this.state.isActive = false;
+                this.hideTooltip();
+                this.removeIndicators();
+            },
+
+            removeIndicators() {
+                this.state.indicators.forEach(indicator => {
+                    if (indicator.parentNode) {
+                        indicator.parentNode.removeChild(indicator);
+                    }
+                });
+                this.state.indicators = [];
             }
-            
-            // Add indicator to back button
-            const backBtn = document.querySelector('.back-button');
-            if (backBtn && !backBtn.querySelector('.indicator')) {
-                const indicator = document.createElement('span');
-                indicator.className = 'indicator';
-                indicator.textContent = '2';
-                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
-                backBtn.style.position = 'relative';
-                backBtn.appendChild(indicator);
-            }
-            
-            // Add indicator to skills
-            const skillsTitle = document.querySelector('.skills-bubbles-title');
-            if (skillsTitle && !skillsTitle.querySelector('.indicator')) {
-                const indicator = document.createElement('span');
-                indicator.className = 'indicator';
-                indicator.textContent = '3';
-                indicator.style.cssText = 'position:absolute;top:-8px;right:-8px;background:#e20074;color:white;border-radius:50%;width:20px;height:20px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;';
-                skillsTitle.style.position = 'relative';
-                skillsTitle.appendChild(indicator);
-            }
-            
-            console.log('Indicators added');
-        }
+        };
         
         
         // Set current year
@@ -387,8 +758,8 @@
             }
             
             // Initialize profile tour guide 
-            console.log('DOM ready, creating tour guide...');
-            createProfileTourGuide();
+            console.log('DOM ready, initializing ProfileTourGuide...');
+            ProfileTourGuide.init();
         });
     </script>
     <script>
