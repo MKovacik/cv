@@ -1,0 +1,397 @@
+<!--
+    Alternative CV for Michal Kováčik
+    
+    A modern, visually dynamic alternative CV with glassmorphism design,
+    animations, and interactive features.
+    
+    To test locally:
+    1. cd /path/to/cv
+    2. python3 -m http.server 8000
+    3. Open http://localhost:8000/alt-cv/alt-index.html in browser
+    
+    This is a self-contained static site with no dependencies on ../css or ../js
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michal Kováčik - Alternative CV</title>
+    <meta name="description" content="AI Strategy, Vision, and Implementation Leader - Interactive CV">
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="alt-style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav class="nav-bar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span>MK</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <div class="image-glow"></div>
+                    <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/MK_Formal_01.jpg" 
+                         alt="Michal Kováčik" class="profile-img">
+                </div>
+                <div class="hero-text">
+                    <h1 class="hero-name">
+                        <span class="name-part">Michal</span>
+                        <span class="name-part">Kováčik</span>
+                    </h1>
+                    <h2 class="hero-title">AI Strategy, Vision, and Implementation Leader</h2>
+                    <p class="hero-summary">
+                        Transforming how we create software through strategic AI implementation. 
+                        Building and scaling high-performing engineering teams that deliver excellence 
+                        and drive organizational success.
+                    </p>
+                    <div class="hero-social">
+                        <a href="mailto:michal.kovacik@icloud.com" class="social-link" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/michalkovacik" target="_blank" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/MKovacik" target="_blank" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-text">Scroll to explore</div>
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-animate="left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-date">April 2024 - Present</div>
+                        <h3>AI Strategy, Vision, and Implementation Leader</h3>
+                        <h4>Deutsche Telekom IT Solutions Slovakia</h4>
+                        <p>
+                            Driving the vision, strategy, and execution of AI to ensure meaningful adoption 
+                            and alignment with business goals across the Deutsche Telekom IT ecosystem.
+                        </p>
+                        <ul class="achievements">
+                            <li>Growing AI developer tools adoption by 21% to over 3,000 developers</li>
+                            <li>Generated over 5.3 million lines of code through AI initiatives</li>
+                            <li>Presented AI achievements directly to Deutsche Telekom AG CEO</li>
+                        </ul>
+                        <div class="company-logo">
+                            <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/DTE.DE-944bd2b4.png" 
+                                 alt="Deutsche Telekom Logo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate="right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-date">September 2023 - March 2025</div>
+                        <h3>Chapter Proxy - Software Engineering, QA and Data</h3>
+                        <h4>Deutsche Telekom IT Solutions Slovakia</h4>
+                        <p>
+                            Provided disciplinary leadership for 15+ People Leads overseeing 350 software 
+                            engineers, QAs, and data scientists.
+                        </p>
+                        <ul class="achievements">
+                            <li>Led 30% growth of software engineering organization</li>
+                            <li>Reduced annual attrition to industry-leading 6%</li>
+                            <li>Orchestrated hackathon with over 300 participants</li>
+                        </ul>
+                        <div class="company-logo">
+                            <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/DTE.DE-944bd2b4.png" 
+                                 alt="Deutsche Telekom Logo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-animate="left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-date">January 2024 - December 2024</div>
+                        <h3>Product Owner | Chatbot Factory & ACA</h3>
+                        <h4>Deutsche Telekom IT Solutions Slovakia</h4>
+                        <p>
+                            Led the ideation and development of two key AI projects: 
+                            Chatbot Factory and Advanced Coding Assistant (ACA).
+                        </p>
+                        <ul class="achievements">
+                            <li>Spearheaded Chatbot Factory from concept to delivery</li>
+                            <li>Contributed to ACA as open-source project on Telekom GitHub</li>
+                            <li>Managed cross-functional teams for AI solution delivery</li>
+                        </ul>
+                        <div class="company-logo">
+                            <img src="https://media.githubusercontent.com/media/MKovacik/cv/main/img/DTE.DE-944bd2b4.png" 
+                                 alt="Deutsche Telekom Logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            
+            <!-- Radial Charts -->
+            <div class="skills-charts">
+                <div class="skill-chart" data-skill="AI Strategy" data-level="95">
+                    <div class="chart-container">
+                        <svg class="circular-chart" viewBox="0 0 100 100">
+                            <circle class="chart-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="chart-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="chart-percentage">95%</div>
+                    </div>
+                    <h4>AI Strategy</h4>
+                </div>
+
+                <div class="skill-chart" data-skill="Leadership" data-level="92">
+                    <div class="chart-container">
+                        <svg class="circular-chart" viewBox="0 0 100 100">
+                            <circle class="chart-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="chart-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="chart-percentage">92%</div>
+                    </div>
+                    <h4>Leadership</h4>
+                </div>
+
+                <div class="skill-chart" data-skill="Software Development" data-level="88">
+                    <div class="chart-container">
+                        <svg class="circular-chart" viewBox="0 0 100 100">
+                            <circle class="chart-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="chart-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="chart-percentage">88%</div>
+                    </div>
+                    <h4>Software Development</h4>
+                </div>
+
+                <div class="skill-chart" data-skill="Strategic Thinking" data-level="90">
+                    <div class="chart-container">
+                        <svg class="circular-chart" viewBox="0 0 100 100">
+                            <circle class="chart-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="chart-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="chart-percentage">90%</div>
+                    </div>
+                    <h4>Strategic Thinking</h4>
+                </div>
+
+                <div class="skill-chart" data-skill="Team Building" data-level="94">
+                    <div class="chart-container">
+                        <svg class="circular-chart" viewBox="0 0 100 100">
+                            <circle class="chart-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="chart-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="chart-percentage">94%</div>
+                    </div>
+                    <h4>Team Building</h4>
+                </div>
+            </div>
+
+            <!-- Skills Tag Cloud -->
+            <div class="skills-cloud">
+                <div class="skill-bubble large">AI Implementation</div>
+                <div class="skill-bubble medium">DevOps</div>
+                <div class="skill-bubble small">C#</div>
+                <div class="skill-bubble large">Leadership</div>
+                <div class="skill-bubble medium">Agile Methods</div>
+                <div class="skill-bubble small">JavaScript</div>
+                <div class="skill-bubble medium">Strategic Planning</div>
+                <div class="skill-bubble large">Team Management</div>
+                <div class="skill-bubble small">Python</div>
+                <div class="skill-bubble medium">Innovation</div>
+                <div class="skill-bubble small">Machine Learning</div>
+                <div class="skill-bubble medium">Storytelling</div>
+                <div class="skill-bubble large">Product Management</div>
+                <div class="skill-bubble small">TypeScript</div>
+                <div class="skill-bubble medium">Conflict Resolution</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card glass-card" data-animate="fade-up">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Chatbot Factory</h3>
+                    </div>
+                    <p>
+                        Self-initiated AI project from concept to delivery, proving solution value 
+                        that was subsequently adopted for formal development across Deutsche Telekom.
+                    </p>
+                    <ul class="project-features">
+                        <li>Full-stack AI chatbot development platform</li>
+                        <li>Cross-functional team leadership</li>
+                        <li>Proof of concept to production delivery</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Product Management</span>
+                        <span class="tag">Leadership</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card" data-animate="fade-up">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Advanced Coding Assistant (ACA)</h3>
+                    </div>
+                    <p>
+                        Open-source AI coding assistant developed for Deutsche Telekom, 
+                        now available on the official Telekom GitHub repository.
+                    </p>
+                    <ul class="project-features">
+                        <li>AI-powered code generation and assistance</li>
+                        <li>Open-source contribution to developer community</li>
+                        <li>Enterprise-scale deployment and adoption</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Open Source</span>
+                        <span class="tag">GitHub</span>
+                    </div>
+                    <a href="https://github.com/telekom/advanced-coding-assistant-backend" 
+                       target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+
+                <div class="project-card glass-card" data-animate="fade-up">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>eRegistracia COVID-19</h3>
+                    </div>
+                    <p>
+                        Led development of COVID-19 testing registration application that reduced 
+                        registration time from hours to minutes. Received Badge of City Košice.
+                    </p>
+                    <ul class="project-features">
+                        <li>Rapid development under emergency conditions</li>
+                        <li>Significant impact on public health response</li>
+                        <li>Official recognition from city government</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Community Impact</span>
+                        <span class="tag">Healthcare</span>
+                        <span class="tag">Recognition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content glass-card">
+                <h2>Let's Connect</h2>
+                <p>
+                    Ready to discuss AI strategy, team leadership, or innovative solutions? 
+                    Let's start a conversation.
+                </p>
+                
+                <div class="contact-methods">
+                    <a href="mailto:michal.kovacik@icloud.com" class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>Email</h4>
+                            <span>michal.kovacik@icloud.com</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/michalkovacik" target="_blank" class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>LinkedIn</h4>
+                            <span>linkedin.com/in/michalkovacik</span>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/MKovacik" target="_blank" class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h4>GitHub</h4>
+                            <span>github.com/MKovacik</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="contact-note">
+                    <p><i class="fas fa-map-marker-alt"></i> Based in Slovakia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="alt-script.js"></script>
+</body>
+</html>
