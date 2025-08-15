@@ -4,7 +4,8 @@
 
 This is a professional CV website built with modern web technologies, featuring a modular architecture with comprehensive error handling, interactive tour guides, and a detailed leadership profile page.
 
-**View online:** [https://mkovacik.github.io/cv/](https://mkovacik.github.io/cv/)  
+**View online:** [https://mkovacik.github.io/cv/](https://mkovacik.github.io/cv/)
+**View alternative created by Githab Copilot from web page:** [https://mkovacik.github.io/cv/alt-cv/alt-index.html](https://mkovacik.github.io/cv/alt-cv/alt-index.html) 
 **To view locally:** Open `index.html` in any web browser.
 
 ## Pages
