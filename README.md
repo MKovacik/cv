@@ -130,13 +130,44 @@ The application implements a comprehensive error handling system with module-lev
 
 ### Recent Technical Improvements
 - **Modular CSS**: Organized into core, layout, components, and utilities
-- **Enhanced Fallback**: Comprehensive script.js fallback for older browsers  
-- **Profile Page Architecture**: Dedicated styling and functionality
+- **Enhanced Fallback**: Comprehensive script.js fallback for older browsers with automatic file:// protocol detection
+- **Profile Page Architecture**: Dedicated styling and functionality with independent scripting
+- **Profile Back Button Fix**: Removed conflicting script.js from profile.html to restore navigation functionality
 - **Tour Guide Conflicts**: Resolved duplicate button issues between pages
+- **Local Development**: Improved detection and fallback for file:// protocol viewing
 
 ## Deployment
 
-To view locally, open `index.html` in any web browser. The modular system will automatically load in supported browsers, with legacy fallback for older browsers.
+### Running Locally
+
+⚠️ **Important:** Due to browser CORS restrictions, ES6 modules don't work with the `file://` protocol when opening HTML files directly.
+
+**Recommended: Use a local HTTP server:**
+
+```bash
+# Navigate to project directory
+cd /Users/A347659/Projects/Michal_Kovacik
+
+# Python 3 (recommended)
+python3 -m http.server 8000
+
+# Python 2 (if Python 3 not available)
+python -m SimpleHTTPServer 8000
+
+# Node.js (if you have npx installed)
+npx http-server
+```
+
+Then open your browser to:
+- **Main CV**: `http://localhost:8000/index.html`
+- **Leadership Profile**: `http://localhost:8000/profile.html`
+
+**Alternative (Direct File Access):**
+You can still open `index.html` directly in a browser. The fallback system will automatically activate, providing full functionality with inline styles and scripts (though you'll see console messages about module loading).
+
+### GitHub Pages Deployment
+
+The site works perfectly when deployed to GitHub Pages or any web server, as the modular ES6 system loads correctly over HTTP/HTTPS.
 
 ### Navigation
 - **Main CV**: Start at `index.html` for complete professional profile

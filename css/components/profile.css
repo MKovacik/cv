@@ -363,6 +363,148 @@ blockquote {
     color: #333333 !important;
 }
 
+/* Guiding Principles Section */
+.guiding-principles-section {
+    margin: var(--spacing-xl) 0;
+    padding: var(--spacing-xl) 0;
+    
+    /* Force light theme */
+    background-color: #ffffff !important;
+    color: #333333 !important;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: var(--font-size-lg);
+    color: #666666 !important;
+    margin-top: var(--spacing-sm);
+    font-weight: var(--font-weight-normal);
+}
+
+.guiding-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.principle-card {
+    background-color: #ffffff !important;
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--light-shadow);
+    transition: all var(--transition-normal);
+    border: 2px solid transparent;
+}
+
+.principle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: rgba(226, 0, 116, 0.2);
+}
+
+.principle-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.principle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+    color: #ffffff !important;
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-2xl);
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(226, 0, 116, 0.25);
+}
+
+.principle-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: #e20074 !important;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.principle-description {
+    font-size: var(--font-size-base);
+    color: #666666 !important;
+    margin-bottom: var(--spacing-md);
+    line-height: var(--line-height-normal);
+}
+
+/* STAR Example Styles */
+.star-example {
+    margin-top: var(--spacing-md);
+}
+
+.star-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(135deg, rgba(226, 0, 116, 0.08) 0%, rgba(153, 0, 80, 0.08) 100%);
+    border: 1px solid rgba(226, 0, 116, 0.2);
+    border-radius: var(--border-radius-sm);
+    color: #e20074 !important;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.star-toggle:hover {
+    background: linear-gradient(135deg, rgba(226, 0, 116, 0.12) 0%, rgba(153, 0, 80, 0.12) 100%);
+    border-color: #e20074;
+    transform: translateX(2px);
+}
+
+.star-toggle i {
+    transition: transform var(--transition-normal);
+}
+
+.star-content {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: #f9f9f9 !important;
+    border-radius: var(--border-radius-sm);
+    border-left: 4px solid #e20074;
+}
+
+.star-item {
+    margin-bottom: var(--spacing-md);
+}
+
+.star-item:last-child {
+    margin-bottom: 0;
+}
+
+.star-label {
+    display: inline-block;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+    color: #ffffff !important;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-xs);
+}
+
+.star-item p {
+    margin: var(--spacing-xs) 0 0 0;
+    padding-left: var(--spacing-sm);
+    line-height: var(--line-height-normal);
+    color: #444444 !important;
+    font-size: var(--font-size-sm);
+}
+
 /* Skills Bubbles Section */
 .skills-bubbles-section {
     margin: var(--spacing-xl) 0;
@@ -441,5 +583,33 @@ blockquote {
         width: 45px;
         height: 45px;
         font-size: var(--font-size-lg);
+    }
+    
+    /* Guiding Principles Responsive */
+    .guiding-principles-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .principle-card {
+        padding: var(--spacing-md);
+    }
+    
+    .principle-header {
+        gap: var(--spacing-sm);
+    }
+    
+    .principle-icon {
+        width: 48px;
+        height: 48px;
+        font-size: var(--font-size-xl);
+    }
+    
+    .principle-title {
+        font-size: var(--font-size-lg);
+    }
+    
+    .section-subtitle {
+        font-size: var(--font-size-base);
     }
 }

@@ -10,11 +10,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <style>
+        /* Inline fallback styles for back button to ensure it works on file:// protocol */
+        .back-button {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            padding: 10px 20px !important;
+            background-color: #ffffff !important;
+            color: #e20074 !important;
+            text-decoration: none !important;
+            border: 2px solid #e20074 !important;
+            border-radius: 25px !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 1000 !important;
+        }
+        .back-button:hover {
+            background-color: #e20074 !important;
+            color: #ffffff !important;
+            transform: translateX(-4px) !important;
+        }
+        header {
+            padding: 20px 0 !important;
+            margin-bottom: 30px !important;
+        }
+    </style>
 </head>
 <body class="profile-page">
     <div class="container">
         <header>
-            <a href="index.html" class="back-button">
+            <a href="index.html" class="back-button" onclick="window.location.href='index.html'; return false;">
                 <i class="fas fa-arrow-left"></i> Back to CV
             </a>
         </header>
@@ -177,6 +206,252 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="guiding-principles-section">
+                <div class="container">
+                    <div class="section-title-container">
+                        <h2 class="section-title">Our Guiding Principles</h2>
+                        <p class="section-subtitle">How I apply Deutsche Telekom's guiding principles in my daily work</p>
+                    </div>
+                    <div class="guiding-principles-grid">
+                        
+                        <!-- Delight Our Customers -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h3 class="principle-title">Delight Our Customers</h3>
+                            </div>
+                            <p class="principle-description">Putting customer needs at the center of everything I do</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>Developers across Deutsche Telekom needed faster, more efficient ways to code, but AI adoption was low and inconsistent.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Increase enterprise-wide adoption of AI developer tools to improve developer experience and productivity.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Spearheaded GitHub Copilot adoption campaign, executed company-wide AI awareness programs reaching 4,000+ employees, and acted as technical evangelist.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Grew active user base by 21% to over 3,000 developers, generating 5.3+ million lines of code. Demonstrated ROI to VTI Management Board.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>Customer-centric evangelism combined with measurable ROI creates sustainable adoption and executive buy-in for transformative technology.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Get Things Done -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-check-square"></i>
+                                </div>
+                                <h3 class="principle-title">Get Things Done</h3>
+                            </div>
+                            <p class="principle-description">Delivering results with focus, accountability, and execution excellence</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>COVID-19 testing registration in Košice region required hours of manual processing, creating bottlenecks and delays for citizens.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Rapidly develop and deploy a digital solution to streamline COVID-19 testing registration for public health emergency.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Led development team in rapid delivery of "eRegistracia" application, managing technical implementation and coordinating with health authorities.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Reduced registration time from hours to minutes. Team received Badge of City Košice from the Mayor for community impact.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>In crisis situations, rapid execution with clear focus on user needs creates transformative impact. Speed + quality = exceptional outcomes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Act with Respect and Integrity -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <h3 class="principle-title">Act with Respect and Integrity</h3>
+                            </div>
+                            <p class="principle-description">Leading with transparency, fairness, and ethical decision-making</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>Software engineers lacked clear career progression framework, leading to uncertainty and reduced satisfaction.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Design and implement transparent career progression system for 350+ engineers across Software Engineering, QA, and Data teams.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Designed transparent career framework with clear criteria, collaborated with international counterparts for global alignment, and communicated changes openly.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Boosted team satisfaction and reduced annual attrition to industry-leading 6%. Grew engineering organization by 30% through improved reputation.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>Transparency and fairness in career development creates trust, satisfaction, and makes the organization a talent magnet.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Team Together, Team Apart -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-users-cog"></i>
+                                </div>
+                                <h3 class="principle-title">Team Together, Team Apart</h3>
+                            </div>
+                            <p class="principle-description">Fostering collaboration across boundaries and empowering teams</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>AI initiatives across Deutsche Telekom business units were fragmented, with inconsistent strategies and duplicated efforts.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Drive group-wide AI strategic alignment across all major DT business units to maximize investment ROI.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Collaborated with leaders from all major business units, aligned local chapter practices with global DTIT standards, and facilitated cross-departmental cooperation.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Established unified market approach, prevented duplication, and ensured maximum ROI on AI investments across the group.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>Breaking silos through active collaboration multiplies impact. Working together across boundaries accelerates innovation and prevents waste.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- I Am T - Count On Me -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="500">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <h3 class="principle-title">I Am T – Count On Me</h3>
+                            </div>
+                            <p class="principle-description">Taking ownership and being reliable in delivering excellence</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>Company needed innovation in AI chatbot and coding assistant technology, but no formal product ownership existed for these concepts.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Take full ownership of two key AI projects (Chatbot Factory and Advanced Coding Assistant) on top of primary responsibilities.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Spearheaded Chatbot Factory as self-initiated venture and led ACA development managing cross-functional teams, driven by passion for AI innovation.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Chatbot Factory proved value and was handed over for formal development. ACA successfully delivered as open-source project on official Telekom GitHub.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>Taking initiative beyond job scope demonstrates ownership. When you own it, others can count on you to deliver excellence.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stay Curious and Grow -->
+                        <div class="principle-card" data-aos="fade-up" data-aos-delay="600">
+                            <div class="principle-header">
+                                <div class="principle-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <h3 class="principle-title">Stay Curious and Grow</h3>
+                            </div>
+                            <p class="principle-description">Continuously learning and fostering innovation through knowledge sharing</p>
+                            <div class="star-example">
+                                <button type="button" class="star-toggle" onclick="toggleStarExample(this)">
+                                    <span>View STAR+L Example</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="star-content" style="display: none;">
+                                    <div class="star-item">
+                                        <strong class="star-label">Situation:</strong>
+                                        <p>Software engineering organization needed stronger culture of innovation, learning, and knowledge sharing to remain competitive.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Task:</strong>
+                                        <p>Foster culture of continuous learning and innovation across 350+ engineers in Software Engineering, QA, and Data chapters.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Action:</strong>
+                                        <p>Launched dedicated communities (SWE, QA, Data), orchestrated hackathon with 300+ participants, mentored at developer events, and created knowledge-sharing platforms.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Result:</strong>
+                                        <p>Established vibrant learning culture, increased cross-departmental project proposals, and positioned organization as innovation leader.</p>
+                                    </div>
+                                    <div class="star-item">
+                                        <strong class="star-label">Learning:</strong>
+                                        <p>Creating spaces for curiosity and experimentation turns individuals into innovators and organizations into learning powerhouses.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
@@ -418,8 +693,227 @@
             margin: 0 3px;
             vertical-align: middle;
         }
+        
+        /* Guiding Principles Section Styles */
+        .guiding-principles-section {
+            margin: 40px 0;
+            padding: 40px 0;
+            background-color: #ffffff !important;
+            color: #333333 !important;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #666666 !important;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+        
+        .guiding-principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .principle-card {
+            background-color: #ffffff !important;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-color: rgba(226, 0, 116, 0.2);
+        }
+        
+        .principle-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .principle-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+            color: #ffffff !important;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(226, 0, 116, 0.25);
+        }
+        
+        .principle-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e20074 !important;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        .principle-description {
+            font-size: 1rem;
+            color: #666666 !important;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        /* STAR Example Styles */
+        .star-example {
+            margin-top: 16px;
+        }
+        
+        .star-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, rgba(226, 0, 116, 0.08) 0%, rgba(153, 0, 80, 0.08) 100%);
+            border: 1px solid rgba(226, 0, 116, 0.2);
+            border-radius: 6px;
+            color: #e20074 !important;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .star-toggle:hover {
+            background: linear-gradient(135deg, rgba(226, 0, 116, 0.12) 0%, rgba(153, 0, 80, 0.12) 100%);
+            border-color: #e20074;
+            transform: translateX(2px);
+        }
+        
+        .star-toggle i {
+            transition: transform 0.3s ease;
+        }
+        
+        .star-content {
+            margin-top: 16px;
+            padding: 16px;
+            background-color: #f9f9f9 !important;
+            border-radius: 6px;
+            border-left: 4px solid #e20074;
+        }
+        
+        .star-item {
+            margin-bottom: 16px;
+        }
+        
+        .star-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .star-label {
+            display: inline-block;
+            padding: 2px 8px;
+            background: linear-gradient(135deg, #e20074 0%, #990050 100%);
+            color: #ffffff !important;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .star-item p {
+            margin: 4px 0 0 0;
+            padding-left: 8px;
+            line-height: 1.6;
+            color: #444444 !important;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive for Guiding Principles */
+        @media (max-width: 768px) {
+            .guiding-principles-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .principle-card {
+                padding: 16px;
+            }
+            
+            .principle-header {
+                gap: 12px;
+            }
+            
+            .principle-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+            
+            .principle-title {
+                font-size: 1.125rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
     </style>
     <script>
+        // Toggle STAR+L example function for Guiding Principles
+        function toggleStarExample(button) {
+            console.log('Toggle STAR example called for button:', button);
+            
+            try {
+                // Find the star content
+                const starExample = button.closest('.star-example');
+                if (!starExample) {
+                    console.error('Could not find .star-example parent');
+                    return;
+                }
+                
+                const starContent = starExample.querySelector('.star-content');
+                const chevronIcon = button.querySelector('.fa-chevron-down, .fa-chevron-up');
+                
+                console.log('Found star content:', starContent);
+                console.log('Found chevron icon:', chevronIcon);
+                
+                if (starContent) {
+                    const currentDisplay = window.getComputedStyle(starContent).display;
+                    const isVisible = currentDisplay === 'block';
+                    console.log('Current display style:', currentDisplay, 'isVisible:', isVisible);
+                    
+                    if (isVisible) {
+                        // Hide
+                        starContent.style.display = 'none';
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-up');
+                            chevronIcon.classList.add('fa-chevron-down');
+                        }
+                        console.log('Hidden star content');
+                    } else {
+                        // Show
+                        starContent.style.display = 'block';
+                        
+                        if (chevronIcon) {
+                            chevronIcon.classList.remove('fa-chevron-down');
+                            chevronIcon.classList.add('fa-chevron-up');
+                        }
+                        console.log('Shown star content');
+                    }
+                } else {
+                    console.error('Star content not found in star-example container');
+                }
+            } catch (error) {
+                console.error('Error in toggleStarExample:', error);
+            }
+        }
+        
         // Simple proof toggle function
         function toggleProof(button) {
             console.log('Toggle proof called for button:', button);
@@ -762,10 +1256,5 @@
             ProfileTourGuide.init();
         });
     </script>
-    <script>
-        // Mark this as profile page to prevent conflicts with script.js tour guide
-        window.isProfilePage = true;
-    </script>
-    <script src="script.js"></script>
 </body>
 </html>
