@@ -10,6 +10,11 @@ export const GalleryManager = {
     // Configuration
     config: {
         galleries: {
+            "Techcelerate2025": {
+                title: "Conference Presentation on Internal Techcelerate 2025 Conference in Budapest, Kosice, Valencia, Thessaloniki and Bonn: Update on AI@DTIT. New tools state of the art and ready to use",
+                path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2025/",
+                images: ['IMG_0071.jpeg', 'IMG_6251.jpeg', 'TechCelerate2025_Map.png']
+            },
             "Techcelerate2024": {
                 title: "Conference Presentation on Internal Techcelerate Conference in Kosice and AI Accelarate Conference in Budapest: Chatbot Factory",
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2024/",
@@ -108,6 +113,7 @@ export const GalleryManager = {
      */
     initializeGalleryIcons() {
         const galleryIcons = {
+            'gallery-Techcelerate2025': 'Techcelerate2025',
             'gallery-Techcelerate2024': 'Techcelerate2024',
             'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
             'gallery-WeAreDevelopers': 'WeAreDevelopers',
