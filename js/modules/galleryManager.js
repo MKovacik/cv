@@ -34,6 +34,11 @@ export const GalleryManager = {
                 title: "Supported local developer communities",
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Hackathons/",
                 images: ['IMG_0135.jpeg', 'IMG_0137.jpeg', 'IMG_0140.jpeg']
+            },
+            "HackathonKosice": {
+                title: "Organizing hackathons in Kosice (400+ participants - biggest hackathon in Eastern Europe)",
+                path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/HackathonKosice/",
+                images: ['Hack-121.jpg', 'Hack2.jpeg', 'Hack3.JPG']
             }
         }
     },
@@ -117,7 +122,8 @@ export const GalleryManager = {
             'gallery-Techcelerate2024': 'Techcelerate2024',
             'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
             'gallery-WeAreDevelopers': 'WeAreDevelopers',
-            'gallery-Hackathons': 'Hackathons'
+            'gallery-Hackathons': 'Hackathons',
+            'gallery-HackathonKosice': 'HackathonKosice'
         };
 
         Object.keys(galleryIcons).forEach(iconId => {
