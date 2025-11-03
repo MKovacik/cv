@@ -33,7 +33,7 @@ export const GalleryManager = {
             "Hackathons": {
                 title: "Supported local developer communities",
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Hackathons/",
-                images: ['IMG_0135.jpeg', 'IMG_0137.jpeg', 'IMG_0140.jpeg']
+                images: ['IMG_0047.jpeg', 'IMG_0135.jpeg', 'IMG_0137.jpeg', 'IMG_0140.jpeg']
             },
             "HackathonKosice": {
                 title: "Organizing hackathons in Kosice (400+ participants - biggest hackathon in Eastern Europe)",
