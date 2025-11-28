@@ -10,6 +10,11 @@ export const GalleryManager = {
     // Configuration
     config: {
         galleries: {
+            "ExplorationDay2025": {
+                title: "Conference Presentation on Exploration Day 2025: Exploring new solutions with your data and AI",
+                path: "img/events/ExplorationDay2025/",
+                images: ['04c2d248-be5e-451b-8307-b2f670a00983.jpeg', '20251118_EXPLO_0059.jpeg', '40ac7bec-1627-4fa0-874d-9a7332223119.jpeg']
+            },
             "Techcelerate2025": {
                 title: "Conference Presentation on Internal Techcelerate 2025 Conference in Budapest, Kosice, Valencia, Thessaloniki and Bonn: Update on AI@DTIT. New tools state of the art and ready to use",
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2025/",
@@ -118,6 +123,7 @@ export const GalleryManager = {
      */
     initializeGalleryIcons() {
         const galleryIcons = {
+            'gallery-ExplorationDay2025': 'ExplorationDay2025',
             'gallery-Techcelerate2025': 'Techcelerate2025',
             'gallery-Techcelerate2024': 'Techcelerate2024',
             'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
