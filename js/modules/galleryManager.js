@@ -175,21 +175,24 @@ export const GalleryManager = {
 
         // Create thumbnail images
         galleryConfig.images.forEach((imageName, index) => {
+            const fullPath = galleryConfig.path + imageName;
+            console.log(`Loading gallery image: ${fullPath}`);
             const img = Utils.createElement('img', {
                 className: 'gallery-image',
-                src: galleryConfig.path + imageName,
+                src: fullPath,
                 alt: `${galleryConfig.title} image ${index + 1}`
             });
 
             // Add click event to open modal
-            Utils.safeAddEventListener(img, 'click', () => 
+            Utils.safeAddEventListener(img, 'click', () =>
                 this.openGalleryModal(galleryId, index)
             );
 
             // Add error handling for missing images
-            Utils.safeAddEventListener(img, 'error', function() {
+            Utils.safeAddEventListener(img, 'error', function (e) {
+                console.error(`Failed to load image: ${fullPath}`, e);
                 this.src = this.createPlaceholderImage();
-                this.alt = 'Image not available';
+                this.alt = `Image not available: ${fullPath}`;
             }.bind(this));
 
             galleryImages.appendChild(img);
@@ -199,7 +202,7 @@ export const GalleryManager = {
         iconElement.appendChild(galleryContainer);
 
         // Add click event to open the first image in modal
-        Utils.safeAddEventListener(iconElement, 'click', () => 
+        Utils.safeAddEventListener(iconElement, 'click', () =>
             this.openGalleryModal(galleryId, 0)
         );
     },
@@ -232,7 +235,7 @@ export const GalleryManager = {
             modalImage.alt = `Gallery image ${index + 1}`;
 
             // Error handling for modal image
-            Utils.safeAddEventListener(modalImage, 'error', function() {
+            Utils.safeAddEventListener(modalImage, 'error', function () {
                 this.src = this.createPlaceholderImage(800, 600);
             }.bind(this), { once: true });
 
@@ -322,6 +325,6 @@ export const GalleryManager = {
      * @returns {string} - Data URL for placeholder image
      */
     createPlaceholderImage(width = 150, height = 80) {
-        return `data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22${width}%22 height%3D%22${height}%22%3E%3Crect width%3D%22${width}%22 height%3D%22${height}%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%22${width/2}%22 y%3D%22${height/2}%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E`;
+        return `data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22${width}%22 height%3D%22${height}%22%3E%3Crect width%3D%22${width}%22 height%3D%22${height}%22 fill%3D%22%23f2f2f2%22%2F%3E%3Ctext x%3D%22${width / 2}%22 y%3D%22${height / 2}%22 font-family%3D%22Arial%22 font-size%3D%2212%22 text-anchor%3D%22middle%22 fill%3D%22%23999%22%3EImage not available%3C%2Ftext%3E%3C%2Fsvg%3E`;
     }
 };
