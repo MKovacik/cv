@@ -15,6 +15,11 @@ export const GalleryManager = {
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2025/",
                 images: ['IMG_0071.jpeg', 'IMG_6251.jpeg', 'TechCelerate2025_Map.png']
             },
+            "ExplorationDay2025": {
+                title: "Exploration Day 2025: Exploring new solutions with data and AI",
+                path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/ExplorationDay2025/",
+                images: ['image1.jpeg', 'image2.jpeg', 'image3.jpeg']
+            },
             "Techcelerate2024": {
                 title: "Conference Presentation on Internal Techcelerate Conference in Kosice and AI Accelarate Conference in Budapest: Chatbot Factory",
                 path: "https://media.githubusercontent.com/media/MKovacik/cv/main/img/events/Techcelerate2024/",
@@ -119,6 +124,7 @@ export const GalleryManager = {
     initializeGalleryIcons() {
         const galleryIcons = {
             'gallery-Techcelerate2025': 'Techcelerate2025',
+            'gallery-ExplorationDay2025': 'ExplorationDay2025',
             'gallery-Techcelerate2024': 'Techcelerate2024',
             'gallery-AllLeadsEssen2024': 'AllLeadsEssen2024',
             'gallery-WeAreDevelopers': 'WeAreDevelopers',
